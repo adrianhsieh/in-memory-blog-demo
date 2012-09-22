@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="UTF-8"?><Graph author="adrianhsieh" created="Fri Jun 01 13:53:50 PDT 2012" guiVersion="3.3.0.M2" id="1338586474397" licenseCode="Unlicensed" licenseType="Unknown" modified="Fri Jun 01 13:53:50 PDT 2012" modifiedBy="adrianhsieh" name="PDX" revision="1.0" showComponentDetails="false">
+<Global>
+<Metadata __sourcePath="{=}/ProductDataeXchangePackage/Items/Item/AdditionalAttributes" _dataStructure="OBJECT" _id="__id" _metadataParentId="Metadata1" _parent_id="__parent_id" _type="Input" id="Metadata2">
+<Record fieldDelimiter="|" name="AdditionalAttributesType" recordDelimiter="&#10;" type="delimited">
+<Field __artificialType="_id" __systemManaged="true" name="__id" type="string"/>
+<Field __artificialType="_parent_id" __systemManaged="true" name="__parent_id" type="string"/>
+<Field __sourcePath="{=}/ProductDataeXchangePackage/Items/Item/AdditionalAttributes/@groupLabel" label="groupLabel" name="groupLabel" type="string"/>
+</Record>
+</Metadata>
+<Metadata __sourcePath="{=}/ProductDataeXchangePackage/Items/Item/AdditionalAttributes/AdditionalAttribute" _dataStructure="OBJECT" _id="__id" _metadataParentId="Metadata2" _parent_id="__parent_id" _type="Input" id="Metadata3">
+<Record fieldDelimiter="|" name="AdditionalAttributeType" recordDelimiter="&#10;" type="delimited">
+<Field __artificialType="_id" __systemManaged="true" name="__id" type="string"/>
+<Field __artificialType="_parent_id" __systemManaged="true" name="__parent_id" type="string"/>
+<Field __sourcePath="{=}/ProductDataeXchangePackage/Items/Item/AdditionalAttributes/AdditionalAttribute/text()" label="text()" name="text" type="string"/>
+<Field __sourcePath="{=}/ProductDataeXchangePackage/Items/Item/AdditionalAttributes/AdditionalAttribute/@name" label="name" name="name" type="string"/>
+<Field __sourcePath="{=}/ProductDataeXchangePackage/Items/Item/AdditionalAttributes/AdditionalAttribute/@value" label="value" name="value" type="string"/>
+<Field __sourcePath="{=}/ProductDataeXchangePackage/Items/Item/AdditionalAttributes/AdditionalAttribute/@dataType" label="dataType" name="dataType" type="string"/>
+<Field __sourcePath="{=}/ProductDataeXchangePackage/Items/Item/AdditionalAttributes/AdditionalAttribute/@dimension" label="dimension" name="dimension" type="string"/>
+<Field __sourcePath="{=}/ProductDataeXchangePackage/Items/Item/AdditionalAttributes/AdditionalAttribute/@description" label="description" name="description" type="string"/>
+</Record>
+</Metadata>
+<Metadata __sourcePath="{=}/ProductDataeXchangePackage/Items/Item/ApprovedManufacturerList/ApprovedManufacturerListItem/AdditionalAttributes/AdditionalAttribute" _dataStructure="OBJECT" _id="__id" _metadataParentId="Metadata1" _parent_id="__parent_id" _type="Input" id="Metadata5">
+<Record fieldDelimiter="|" name="AdditionalAttributeType" recordDelimiter="&#10;" type="delimited">
+<Field __artificialType="_id" __systemManaged="true" name="__id" type="string"/>
+<Field __artificialType="_parent_id" __systemManaged="true" name="__parent_id" type="string"/>
+<Field __sourcePath="{=}/ProductDataeXchangePackage/Items/Item/ApprovedManufacturerList/ApprovedManufacturerListItem/AdditionalAttributes/AdditionalAttribute/text()" label="text()" name="text" type="string"/>
+<Field __sourcePath="{=}/ProductDataeXchangePackage/Items/Item/ApprovedManufacturerList/ApprovedManufacturerListItem/AdditionalAttributes/AdditionalAttribute/@name" label="name" name="name" type="string"/>
+<Field __sourcePath="{=}/ProductDataeXchangePackage/Items/Item/ApprovedManufacturerList/ApprovedManufacturerListItem/AdditionalAttributes/AdditionalAttribute/@value" label="value" name="value" type="string"/>
+<Field __sourcePath="{=}/ProductDataeXchangePackage/Items/Item/ApprovedManufacturerList/ApprovedManufacturerListItem/AdditionalAttributes/AdditionalAttribute/@dataType" label="dataType" name="dataType" type="string"/>
+<Field __sourcePath="{=}/ProductDataeXchangePackage/Items/Item/ApprovedManufacturerList/ApprovedManufacturerListItem/AdditionalAttributes/AdditionalAttribute/@dimension" label="dimension" name="dimension" type="string"/>
+<Field __sourcePath="{=}/ProductDataeXchangePackage/Items/Item/ApprovedManufacturerList/ApprovedManufacturerListItem/AdditionalAttributes/AdditionalAttribute/@description" label="description" name="description" type="string"/>
+</Record>
+</Metadata>
+<Metadata __sourcePath="{=}/ProductDataeXchangePackage/Items/Item/BillOfMaterial/BillOfMaterialItem" _dataStructure="OBJECT" _id="__id" _metadataParentId="Metadata1" _parent_id="__parent_id" _type="Input" id="Metadata4">
+<Record fieldDelimiter="|" name="BillOfMaterialItemType" recordDelimiter="&#10;" type="delimited">
+<Field __artificialType="_id" __systemManaged="true" name="__id" type="string"/>
+<Field __artificialType="_parent_id" __systemManaged="true" name="__parent_id" type="string"/>
+<Field __sourcePath="{=}/ProductDataeXchangePackage/Items/Item/BillOfMaterial/BillOfMaterialItem/text()" label="text()" name="text" type="string"/>
+<Field __sourcePath="{=}/ProductDataeXchangePackage/Items/Item/BillOfMaterial/BillOfMaterialItem/@revisionIdentifier" label="revisionIdentifier" name="revisionIdentifier" type="string"/>
+<Field __sourcePath="{=}/ProductDataeXchangePackage/Items/Item/BillOfMaterial/BillOfMaterialItem/@billOfMaterialItemIdentifier" label="billOfMaterialItemIdentifier" name="billOfMaterialItemIdentifier" type="string"/>
+<Field __sourcePath="{=}/ProductDataeXchangePackage/Items/Item/BillOfMaterial/BillOfMaterialItem/@billOfMaterialItemUniqueIdentifier" label="billOfMaterialItemUniqueIdentifier" name="billOfMaterialItemUniqueIdentifier" type="string"/>
+<Field __sourcePath="{=}/ProductDataeXchangePackage/Items/Item/BillOfMaterial/BillOfMaterialItem/@itemQuantity" label="itemQuantity" name="itemQuantity" type="integer"/>
+<Field __sourcePath="{=}/ProductDataeXchangePackage/Items/Item/BillOfMaterial/BillOfMaterialItem/@globalProductQuantityTypeCode" label="globalProductQuantityTypeCode" name="globalProductQuantityTypeCode" type="string"/>
+<Field __sourcePath="{=}/ProductDataeXchangePackage/Items/Item/BillOfMaterial/BillOfMaterialItem/@globalProductQuantityTypeCodeOther" label="globalProductQuantityTypeCodeOther" name="globalProductQuantityTypeCodeOther" type="string"/>
+<Field __sourcePath="{=}/ProductDataeXchangePackage/Items/Item/BillOfMaterial/BillOfMaterialItem/@notes" label="notes" name="notes" type="string"/>
+<Field __sourcePath="{=}/ProductDataeXchangePackage/Items/Item/BillOfMaterial/BillOfMaterialItem/@description" label="description" name="description" type="string"/>
+<Field __sourcePath="{=}/ProductDataeXchangePackage/Items/Item/BillOfMaterial/BillOfMaterialItem/@proprietarySequenceIdentifier" label="proprietarySequenceIdentifier" name="proprietarySequenceIdentifier" type="integer"/>
+</Record>
+</Metadata>
+<Metadata __sourcePath="{=}/ProductDataeXchangePackage/Items/Item" _dataStructure="OBJECT" _id="__id" _metadataParentId="Metadata0" _parent_id="__parent_id" _type="Input" id="Metadata1">
+<Record fieldDelimiter="|" name="ItemType" recordDelimiter="&#10;" type="delimited">
+<Field __artificialType="_id" __systemManaged="true" name="__id" type="string"/>
+<Field __artificialType="_parent_id" __systemManaged="true" name="__parent_id" type="string"/>
+<Field __sourcePath="{=}/ProductDataeXchangePackage/Items/Item/ApprovedManufacturerList/ApprovedManufacturerListItem/AdditionalAttributes/@groupLabel" label="groupLabel" name="groupLabel" type="string"/>
+<Field __sourcePath="{=}/ProductDataeXchangePackage/Items/Item/ApprovedManufacturerList/ApprovedManufacturerListItem/@manufacturerPartIdentifier" label="manufacturerPartIdentifier" name="manufacturerPartIdentifier" type="string"/>
+<Field __sourcePath="{=}/ProductDataeXchangePackage/Items/Item/ApprovedManufacturerList/ApprovedManufacturerListItem/@manufacturerPartUniqueIdentifier" label="manufacturerPartUniqueIdentifier" name="manufacturerPartUniqueIdentifier" type="string"/>
+<Field __sourcePath="{=}/ProductDataeXchangePackage/Items/Item/ApprovedManufacturerList/ApprovedManufacturerListItem/@manufacturerContactUniqueIdentifier" label="manufacturerContactUniqueIdentifier" name="manufacturerContactUniqueIdentifier" type="string"/>
+<Field __sourcePath="{=}/ProductDataeXchangePackage/Items/Item/ApprovedManufacturerList/ApprovedManufacturerListItem/@globalManufacturerPartStatusCode" label="globalManufacturerPartStatusCode" name="globalManufacturerPartStatusCode" type="string"/>
+<Field __sourcePath="{=}/ProductDataeXchangePackage/Items/Item/ApprovedManufacturerList/ApprovedManufacturerListItem/@description" label="description" name="description" type="string"/>
+<Field __sourcePath="{=}/ProductDataeXchangePackage/Items/Item/ApprovedManufacturerList/ApprovedManufacturerListItem/@manufacturedBy" label="manufacturedBy" name="manufacturedBy" type="string"/>
+<Field __sourcePath="{=}/ProductDataeXchangePackage/Items/Item/@itemIdentifier" label="itemIdentifier" name="itemIdentifier" type="string"/>
+<Field __sourcePath="{=}/ProductDataeXchangePackage/Items/Item/@itemUniqueIdentifier" label="itemUniqueIdentifier" name="itemUniqueIdentifier" type="string"/>
+<Field __sourcePath="{=}/ProductDataeXchangePackage/Items/Item/@globalLifeCyclePhaseCode" label="globalLifeCyclePhaseCode" name="globalLifeCyclePhaseCode" type="string"/>
+<Field __sourcePath="{=}/ProductDataeXchangePackage/Items/Item/@globalProductTypeCode" label="globalProductTypeCode" name="globalProductTypeCode" type="string"/>
+<Field __sourcePath="{=}/ProductDataeXchangePackage/Items/Item/@revisionIdentifier" label="revisionIdentifier" name="revisionIdentifier" type="string"/>
+<Field __sourcePath="{=}/ProductDataeXchangePackage/Items/Item/@proprietaryProductFamily" label="proprietaryProductFamily" name="proprietaryProductFamily" type="string"/>
+<Field __sourcePath="{=}/ProductDataeXchangePackage/Items/Item/@category" label="category" name="category" type="string"/>
+<Field __sourcePath="{=}/ProductDataeXchangePackage/Items/Item/@globalProductUnitOfMeasureCode" label="globalProductUnitOfMeasureCode" name="globalProductUnitOfMeasureCode" type="string"/>
+<Field __sourcePath="{=}/ProductDataeXchangePackage/Items/Item/@ownerName" label="ownerName" name="ownerName" type="string"/>
+<Field __sourcePath="{=}/ProductDataeXchangePackage/Items/Item/@isTopLevel" label="isTopLevel" name="isTopLevel" type="string"/>
+<Field __sourcePath="{=}/ProductDataeXchangePackage/Items/Item/@description" label="description" name="description2" type="string"/>
+<Field __artificialType="XPATH" __xpath="{=}/ProductDataeXchangePackage/Items/Item/AdditionalAttributes[@groupLabel='Version Information']/AdditionalAttribute[@name='Change Number']/@value" label="changeNumber" name="changeNumber" type="string"/>
+<Field __artificialType="XPATH" __xpath="{=}/ProductDataeXchangePackage/Items/Item/BillOfMaterial/BillOfMaterialItem/@billOfMaterialItemIdentifier" label="bomIdentifier" name="bomIdentifier" type="string"/>
+<Field __artificialType="XPATH" __xpath="{=}/ProductDataeXchangePackage/Items/Item/AdditionalAttributes[@groupLabel='Version Information']/AdditionalAttribute[@name='Material Effectivity Date']/@value" label="materialEffectivityDate" name="materialEffectivityDate" type="string"/>
+<Field __artificialType="XPATH" __xpath="{=}/ProductDataeXchangePackage/Items/Item/AdditionalAttributes[@groupLabel='Version Information']/AdditionalAttribute[@name='Version Notes']/@value" label="versionNotes" name="versionNotes" type="string"/>
+<Field __sourcePath="{=}/ProductDataeXchangePackage/Items/Item/revisionReleasedDate" format="yyyy-MM-dd'T'HH:mm:ssZ" name="revisionReleasedDate" type="date"/>
+</Record>
+</Metadata>
+<Metadata __sourcePath="{}/outputMetadata" _dataStructure="SINGLE_DIMENSIONAL_COLLECTION" _id="__id" _type="Output" id="a6b1c163-293f-42aa-8590-b7f70a09f264">
+<Record fieldDelimiter="|" label="outputMetadata" name="outputMetadata" recordDelimiter="&#10;" type="delimited">
+<Field __artificialType="_id" __systemManaged="true" name="__id" type="string"/>
+<Field __sourcePath="{=}/outputMetadata/itemIdentifier" name="itemIdentifier" type="string"/>
+<Field __sourcePath="{=}/outputMetadata/description" name="description" type="string"/>
+<Field __sourcePath="{=}/outputMetadata/revisionIdentifier" name="revisionIdentifier" type="string"/>
+<Field __sourcePath="{=}/outputMetadata/billOfMaterialItemIdentifier" name="billOfMaterialItemIdentifier" type="string"/>
+<Field __sourcePath="{=}/outputMetadata/changeNumber" name="changeNumber" type="string"/>
+<Field __sourcePath="{=}/outputMetadata/versionNotes" name="versionNotes" type="string"/>
+<Field __sourcePath="{=}/outputMetadata/revisionReleaseDate" name="revisionReleaseDate" type="date"/>
+<Field __sourcePath="{=}/outputMetadata/globalProductUnitOfMeasureCode" name="globalProductUnitOfMeasureCode" type="string"/>
+<Field __sourcePath="{=}/outputMetadata/kenandyUOM" name="kenandyUOM" type="string"/>
+<Field __sourcePath="{=}/outputMetadata/materialEffectivityDate" name="materialEffectivityDate" type="string"/>
+<Field __sourcePath="{=}/outputMetadata/itemUniqueIdentifier" name="itemUniqueIdentifier" type="string"/>
+<Field __sourcePath="{=}/outputMetadata/globalProductTypeCode" name="globalProductTypeCode" type="string"/>
+</Record>
+</Metadata>
+<Metadata __sourcePath="{=}/ProductDataeXchangePackage" _dataStructure="OBJECT" _id="__id" _type="Input" id="Metadata0">
+<Record fieldDelimiter="|" name="ProductDataeXchangePackageType" recordDelimiter="&#10;" type="delimited">
+<Field __artificialType="_id" __systemManaged="true" name="__id" type="string"/>
+<Field __sourcePath="{=}/ProductDataeXchangePackage/ManufacturerParts/ManufacturerPart/ApprovedSupplierList/ApprovedSupplierListItem/text()" label="text()" name="text2" type="string"/>
+<Field __sourcePath="{=}/ProductDataeXchangePackage/ManufacturerParts/ManufacturerPart/ApprovedSupplierList/ApprovedSupplierListItem/@supplierPartIdentifier" label="supplierPartIdentifier" name="supplierPartIdentifier" type="string"/>
+<Field __sourcePath="{=}/ProductDataeXchangePackage/ManufacturerParts/ManufacturerPart/ApprovedSupplierList/ApprovedSupplierListItem/@supplierPartUniqueIdentifier" label="supplierPartUniqueIdentifier" name="supplierPartUniqueIdentifier" type="string"/>
+<Field __sourcePath="{=}/ProductDataeXchangePackage/ManufacturerParts/ManufacturerPart/ApprovedSupplierList/ApprovedSupplierListItem/@supplierPartContactUniqueIdentifier" label="supplierPartContactUniqueIdentifier" name="supplierPartContactUniqueIdentifier" type="string"/>
+<Field __sourcePath="{=}/ProductDataeXchangePackage/ManufacturerParts/ManufacturerPart/ApprovedSupplierList/ApprovedSupplierListItem/@globalSupplierPartStatusCode" label="globalSupplierPartStatusCode" name="globalSupplierPartStatusCode" type="string"/>
+<Field __sourcePath="{=}/ProductDataeXchangePackage/ManufacturerParts/ManufacturerPart/ApprovedSupplierList/ApprovedSupplierListItem/@comments" label="comments" name="comments" type="string"/>
+<Field __sourcePath="{=}/ProductDataeXchangePackage/ManufacturerParts/ManufacturerPart/ApprovedSupplierList/ApprovedSupplierListItem/@suppliedBy" label="suppliedBy" name="suppliedBy" type="string"/>
+<Field __sourcePath="{=}/ProductDataeXchangePackage/ManufacturerParts/ManufacturerPart/@manufacturerPartIdentifier" label="manufacturerPartIdentifier" name="manufacturerPartIdentifier" type="string"/>
+<Field __sourcePath="{=}/ProductDataeXchangePackage/ManufacturerParts/ManufacturerPart/@manufacturerPartUniqueIdentifier" label="manufacturerPartUniqueIdentifier" name="manufacturerPartUniqueIdentifier" type="string"/>
+<Field __sourcePath="{=}/ProductDataeXchangePackage/ManufacturerParts/ManufacturerPart/@manufacturerName" label="manufacturerName" name="manufacturerName" type="string"/>
+<Field __sourcePath="{=}/ProductDataeXchangePackage/ManufacturerParts/ManufacturerPart/@manufacturerContactUniqueIdentifier" label="manufacturerContactUniqueIdentifier" name="manufacturerContactUniqueIdentifier" type="string"/>
+<Field __sourcePath="{=}/ProductDataeXchangePackage/ManufacturerParts/ManufacturerPart/@referenceNotes" label="referenceNotes" name="referenceNotes" type="string"/>
+<Field __sourcePath="{=}/ProductDataeXchangePackage/ManufacturerParts/ManufacturerPart/@manufacturerPartType" label="manufacturerPartType" name="manufacturerPartType" type="string"/>
+<Field __sourcePath="{=}/ProductDataeXchangePackage/ManufacturerParts/ManufacturerPart/@description" label="description" name="description" type="string"/>
+<Field __sourcePath="{=}/ProductDataeXchangePackage/ManufacturerParts/ManufacturerPart/@isTopLevel" label="isTopLevel" name="isTopLevel2" type="string"/>
+<Field __sourcePath="{=}/ProductDataeXchangePackage/SupplierParts/SupplierPart/text()" label="text()" name="text3" type="string"/>
+<Field __sourcePath="{=}/ProductDataeXchangePackage/SupplierParts/SupplierPart/@supplierPartIdentifier" label="supplierPartIdentifier" name="supplierPartIdentifier2" type="string"/>
+<Field __sourcePath="{=}/ProductDataeXchangePackage/SupplierParts/SupplierPart/@supplierPartUniqueIdentifier" label="supplierPartUniqueIdentifier" name="supplierPartUniqueIdentifier2" type="string"/>
+<Field __sourcePath="{=}/ProductDataeXchangePackage/SupplierParts/SupplierPart/@supplierName" label="supplierName" name="supplierName" type="string"/>
+<Field __sourcePath="{=}/ProductDataeXchangePackage/SupplierParts/SupplierPart/@supplierContactUniqueIdentifier" label="supplierContactUniqueIdentifier" name="supplierContactUniqueIdentifier" type="string"/>
+<Field __sourcePath="{=}/ProductDataeXchangePackage/SupplierParts/SupplierPart/@referenceNotes" label="referenceNotes" name="referenceNotes2" type="string"/>
+<Field __sourcePath="{=}/ProductDataeXchangePackage/SupplierParts/SupplierPart/@supplierPartType" label="supplierPartType" name="supplierPartType" type="string"/>
+<Field __sourcePath="{=}/ProductDataeXchangePackage/SupplierParts/SupplierPart/@description" label="description" name="description2" type="string"/>
+<Field __sourcePath="{=}/ProductDataeXchangePackage/SupplierParts/SupplierPart/@isTopLevel" label="isTopLevel" name="isTopLevel3" type="string"/>
+<Field __sourcePath="{=}/ProductDataeXchangePackage/Contacts/Contact/text()" label="text()" name="text4" type="string"/>
+<Field __sourcePath="{=}/ProductDataeXchangePackage/Contacts/Contact/@contactIdentifier" label="contactIdentifier" name="contactIdentifier" type="string"/>
+<Field __sourcePath="{=}/ProductDataeXchangePackage/Contacts/Contact/@contactUniqueIdentifier" label="contactUniqueIdentifier" name="contactUniqueIdentifier" type="string"/>
+<Field __sourcePath="{=}/ProductDataeXchangePackage/Contacts/Contact/@contactName" label="contactName" name="contactName" type="string"/>
+<Field __sourcePath="{=}/ProductDataeXchangePackage/Contacts/Contact/@addressLine1" label="addressLine1" name="addressLine1" type="string"/>
+<Field __sourcePath="{=}/ProductDataeXchangePackage/Contacts/Contact/@addressLine2" label="addressLine2" name="addressLine2" type="string"/>
+<Field __sourcePath="{=}/ProductDataeXchangePackage/Contacts/Contact/@cityName" label="cityName" name="cityName" type="string"/>
+<Field __sourcePath="{=}/ProductDataeXchangePackage/Contacts/Contact/@regionName" label="regionName" name="regionName" type="string"/>
+<Field __sourcePath="{=}/ProductDataeXchangePackage/Contacts/Contact/@globalCountryCode" label="globalCountryCode" name="globalCountryCode" type="string"/>
+<Field __sourcePath="{=}/ProductDataeXchangePackage/Contacts/Contact/@nationalPostalCode" label="nationalPostalCode" name="nationalPostalCode" type="string"/>
+<Field __sourcePath="{=}/ProductDataeXchangePackage/Contacts/Contact/@telephoneNumber" label="telephoneNumber" name="telephoneNumber" type="string"/>
+<Field __sourcePath="{=}/ProductDataeXchangePackage/Contacts/Contact/@facsimileNumber" label="facsimileNumber" name="facsimileNumber" type="string"/>
+<Field __sourcePath="{=}/ProductDataeXchangePackage/Contacts/Contact/@department" label="department" name="department" type="string"/>
+<Field __sourcePath="{=}/ProductDataeXchangePackage/Contacts/Contact/@businessName" label="businessName" name="businessName" type="string"/>
+<Field __sourcePath="{=}/ProductDataeXchangePackage/Contacts/Contact/@emailAddress" label="emailAddress" name="emailAddress" type="string"/>
+<Field __sourcePath="{=}/ProductDataeXchangePackage/Contacts/Contact/@universalResourceIdentifier" label="universalResourceIdentifier" name="universalResourceIdentifier" type="string"/>
+<Field __sourcePath="{=}/ProductDataeXchangePackage/Contacts/Contact/@contactStatus" label="contactStatus" name="contactStatus" type="string"/>
+<Field __sourcePath="{=}/ProductDataeXchangePackage/Contacts/Contact/@isTopLevel" label="isTopLevel" name="isTopLevel4" type="string"/>
+<Field __sourcePath="{=}/ProductDataeXchangePackage/@thisDocumentIdentifier" label="thisDocumentIdentifier" name="thisDocumentIdentifier" type="string"/>
+<Field __sourcePath="{=}/ProductDataeXchangePackage/@thisDocumentGenerationDateTime" label="thisDocumentGenerationDateTime" name="thisDocumentGenerationDateTime" type="date"/>
+<Field __sourcePath="{=}/ProductDataeXchangePackage/@thisDocumentModificationDateTime" label="thisDocumentModificationDateTime" name="thisDocumentModificationDateTime" type="date"/>
+<Field __sourcePath="{=}/ProductDataeXchangePackage/@originatedByContactName" label="originatedByContactName" name="originatedByContactName" type="string"/>
+<Field __sourcePath="{=}/ProductDataeXchangePackage/@packageType" label="packageType" name="packageType" type="string"/>
+<Field __sourcePath="{=}/ProductDataeXchangePackage/@dataSource" label="dataSource" name="dataSource" type="string"/>
+<Field __sourcePath="{=}/ProductDataeXchangePackage/@thisDocumentCopyright" label="thisDocumentCopyright" name="thisDocumentCopyright" type="string"/>
+</Record>
+</Metadata>
+<Metadata _type="Lookup" id="Metadata6">
+<Record fieldDelimiter="|" name="UOMconversion" recordDelimiter="&#10;" type="delimited">
+<Field name="globalProductUnitOfMeasureCode" type="string"/>
+<Field name="kenandyUOM" type="string"/>
+</Record>
+</Metadata>
+<LookupTable id="UOMconversion" key="globalProductUnitOfMeasureCode" metadata="Metadata6" name="UOMconversion" type="simpleLookup">
+<attr name="lookupType"><![CDATA[UserDefined]]></attr>
+<attr name="data"><![CDATA[each|EA
+in|IN
+ft|FT
+Case|CASE
+Roll|ROLL
+doc|DOC
+]]></attr>
+</LookupTable>
+<Dictionary>
+<Entry id="DictionaryEntry0" input="true" name="inputPayload" output="false" type="object"/>
+<Entry id="DictionaryEntry1" input="false" name="outputPayload" output="true" type="object"/>
+</Dictionary>
+</Global>
+<Phase number="0">
+<Node enabled="enabled" fileURL="dict:outputPayload" guiHeight="0" guiName="MAP Writer" guiWidth="0" guiX="460" guiY="20" id="MAP_WRITER0" type="MAP_WRITER">
+<attr name="mapping"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<clover:collection clover:name="outputMetadata" xmlns:clover="http://www.cloveretl.com/ns/xmlmapping">
+  <item clover:inPort="0">
+    <itemIdentifier>$0.itemIdentifier</itemIdentifier>
+    <description>$0.description</description>
+    <revisionIdentifier>$0.revisionIdentifier</revisionIdentifier>
+    <billOfMaterialItemIdentifier>$0.billOfMaterialItemIdentifier</billOfMaterialItemIdentifier>
+    <changeNumber>$0.changeNumber</changeNumber>
+    <versionNotes>$0.versionNotes</versionNotes>
+    <revisionReleaseDate>$0.revisionReleaseDate</revisionReleaseDate>
+    <globalProductUnitOfMeasureCode>$0.globalProductUnitOfMeasureCode</globalProductUnitOfMeasureCode>
+    <kenandyUOM>$0.kenandyUOM</kenandyUOM>
+    <materialEffectivityDate>$0.materialEffectivityDate</materialEffectivityDate>
+    <itemUniqueIdentifier>$0.itemUniqueIdentifier</itemUniqueIdentifier>
+    <globalProductTypeCode>$0.globalProductTypeCode</globalProductTypeCode>
+  </item>
+</clover:collection>]]></attr>
+<attr name="_data_format"><![CDATA[MAP]]></attr>
+</Node>
+<Node enabled="enabled" guiHeight="0" guiName="Item_to_outputMetadata" guiWidth="0" guiX="240" guiY="20" id="REFORMAT0" type="REFORMAT">
+<attr name="transform"><![CDATA[//#CTL2
+
+// Transforms input record into output record.
+function integer transform() {
+		$out.0.globalProductTypeCode = $in.0.globalProductTypeCode;
+	$out.0.itemUniqueIdentifier = $in.0.itemUniqueIdentifier;
+	$out.0.materialEffectivityDate = $in.0.materialEffectivityDate;
+	$out.0.revisionReleaseDate = $in.0.revisionReleasedDate;
+						$out.0.kenandyUOM = isnull(lookup(UOMconversion).get($in.0.globalProductUnitOfMeasureCode)) ? "" : lookup(UOMconversion).get($in.0.globalProductUnitOfMeasureCode).kenandyUOM;
+				$out.0.globalProductUnitOfMeasureCode = $in.0.globalProductUnitOfMeasureCode;
+		$out.0.versionNotes = $in.0.versionNotes;
+		$out.0.billOfMaterialItemIdentifier = $in.0.bomIdentifier;
+	$out.0.changeNumber = $in.0.changeNumber;
+	$out.0.revisionIdentifier = $in.0.revisionIdentifier;
+	$out.0.description = $in.0.description2;
+	$out.0.__id = $in.0.__id;
+	$out.0.itemIdentifier = $in.0.itemIdentifier;
+
+	return ALL;
+}
+
+// Called during component initialization.
+// function boolean init() {}
+
+// Called during each graph run before the transform is executed. May be used to allocate and initialize resources
+// required by the transform. All resources allocated within this method should be released
+// by the postExecute() method.
+// function void preExecute() {}
+
+// Called only if transform() throws an exception.
+// function integer transformOnError(string errorMessage, string stackTrace) {}
+
+// Called during each graph run after the entire transform was executed. Should be used to free any resources
+// allocated within the preExecute() method.
+// function void postExecute() {}
+
+// Called to return a user-defined error message when an error occurs.
+// function string getMessage() {}
+]]></attr>
+</Node>
+<Node charset="UTF-8" enabled="enabled" fileURL="dict:inputPayload" guiHeight="0" guiName="XML Reader" guiWidth="0" guiX="20" guiY="20" id="XML_READER0" type="XML_READER">
+<attr name="xmlSchemaURL"><![CDATA[/ProductDataeXchangePackage.xsd]]></attr>
+<attr name="mapping"><![CDATA[<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Context outPort="0" sequenceField="__id" xpath="/ProductDataeXchangePackage/Items/Item">
+  <Mapping cloverField="groupLabel" trim="true" xpath="ApprovedManufacturerList/ApprovedManufacturerListItem/AdditionalAttributes/@groupLabel"/>
+  <Mapping cloverField="manufacturerPartIdentifier" trim="true" xpath="ApprovedManufacturerList/ApprovedManufacturerListItem/@manufacturerPartIdentifier"/>
+  <Mapping cloverField="manufacturerPartUniqueIdentifier" trim="true" xpath="ApprovedManufacturerList/ApprovedManufacturerListItem/@manufacturerPartUniqueIdentifier"/>
+  <Mapping cloverField="manufacturerContactUniqueIdentifier" trim="true" xpath="ApprovedManufacturerList/ApprovedManufacturerListItem/@manufacturerContactUniqueIdentifier"/>
+  <Mapping cloverField="globalManufacturerPartStatusCode" trim="true" xpath="ApprovedManufacturerList/ApprovedManufacturerListItem/@globalManufacturerPartStatusCode"/>
+  <Mapping cloverField="description" trim="true" xpath="ApprovedManufacturerList/ApprovedManufacturerListItem/@description"/>
+  <Mapping cloverField="manufacturedBy" trim="true" xpath="ApprovedManufacturerList/ApprovedManufacturerListItem/@manufacturedBy"/>
+  <Mapping cloverField="itemIdentifier" trim="true" xpath="@itemIdentifier"/>
+  <Mapping cloverField="itemUniqueIdentifier" trim="true" xpath="@itemUniqueIdentifier"/>
+  <Mapping cloverField="globalLifeCyclePhaseCode" trim="true" xpath="@globalLifeCyclePhaseCode"/>
+  <Mapping cloverField="globalProductTypeCode" trim="true" xpath="@globalProductTypeCode"/>
+  <Mapping cloverField="revisionIdentifier" trim="true" xpath="@revisionIdentifier"/>
+  <Mapping cloverField="proprietaryProductFamily" trim="true" xpath="@proprietaryProductFamily"/>
+  <Mapping cloverField="category" trim="true" xpath="@category"/>
+  <Mapping cloverField="globalProductUnitOfMeasureCode" trim="true" xpath="@globalProductUnitOfMeasureCode"/>
+  <Mapping cloverField="ownerName" trim="true" xpath="@ownerName"/>
+  <Mapping cloverField="isTopLevel" trim="true" xpath="@isTopLevel"/>
+  <Mapping cloverField="description2" trim="true" xpath="@description"/>
+  <Mapping cloverField="revisionReleasedDate" trim="true" xpath="revisionReleasedDate"/>
+  <Mapping cloverField="changeNumber" trim="true" xpath="AdditionalAttributes[@groupLabel='Version Information']/AdditionalAttribute[@name='Change Number']/@value"/>
+  <Mapping cloverField="bomIdentifier" trim="true" xpath="BillOfMaterial/BillOfMaterialItem/@billOfMaterialItemIdentifier"/>
+  <Mapping cloverField="materialEffectivityDate" trim="true" xpath="AdditionalAttributes[@groupLabel='Version Information']/AdditionalAttribute[@name='Material Effectivity Date']/@value"/>
+  <Mapping cloverField="versionNotes" trim="true" xpath="AdditionalAttributes[@groupLabel='Version Information']/AdditionalAttribute[@name='Version Notes']/@value"/>
+</Context>
+]]></attr>
+<attr name="_data_format"><![CDATA[XML]]></attr>
+</Node>
+<Edge fromNode="REFORMAT0:0" guiBendpoints="" id="Edge1" inPort="Port 0 (in)" metadata="a6b1c163-293f-42aa-8590-b7f70a09f264" outPort="Port 0 (out)" toNode="MAP_WRITER0:0"/>
+<Edge fromNode="XML_READER0:0" guiBendpoints="" id="Edge0" inPort="Port 0 (in)" metadata="Metadata1" outPort="Port 0 (out)" toNode="REFORMAT0:0"/>
+</Phase>
+</Graph>

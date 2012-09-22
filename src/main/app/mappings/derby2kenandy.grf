@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?><Graph author="Mike" created="Tue Jul 17 15:05:55 PDT 2012" guiVersion="3.3.0.M2" id="1342567436881" licenseCode="Unlicensed" licenseType="Unknown" modified="Tue Jul 17 15:05:55 PDT 2012" modifiedBy="Mike" name="derby2kenandy" revision="1.0" showComponentDetails="false">
+<Global>
+<Metadata __sourcePath="{}/inputMetadata" _dataStructure="SINGLE_DIMENSIONAL_COLLECTION" _id="__id" _type="Input" id="b69186e3-bb76-43a9-85bc-484a890af5c7">
+<Record fieldDelimiter="|" label="inputMetadata" name="inputMetadata" recordDelimiter="&#10;" type="delimited">
+<Field __artificialType="_id" __systemManaged="true" name="__id" type="string"/>
+<Field __sourcePath="{=}/inputMetadata/ITEMIDENTIFIER" label="ITEMIDENTIFIER" name="ITEMIDENTIFIER" type="string"/>
+<Field __sourcePath="{=}/inputMetadata/DESCRIPTION" label="DESCRIPTION" name="DESCRIPTION" type="string"/>
+<Field __sourcePath="{=}/inputMetadata/REVISIONIDENTIFIER" label="REVISIONIDENTIFIER" name="REVISIONIDENTIFIER" type="string"/>
+<Field __sourcePath="{=}/inputMetadata/GLOBALLIFECYCLEPHASECODE" label="GLOBALLIFECYCLEPHASECODE" name="GLOBALLIFECYCLEPHASECODE" type="string"/>
+<Field __sourcePath="{=}/inputMetadata/GLOBALPRODUCTTYPECODE" label="GLOBALPRODUCTTYPECODE" name="GLOBALPRODUCTTYPECODE" type="string"/>
+<Field __sourcePath="{=}/inputMetadata/KENANDYUOM" label="KENANDYUOM" name="KENANDYUOM" type="string"/>
+<Field __sourcePath="{=}/inputMetadata/UOMID" containerType="" name="UOMID" type="string"/>
+</Record>
+</Metadata>
+<Metadata __sourcePath="{}/outputMetadata" _dataStructure="SINGLE_DIMENSIONAL_COLLECTION" _id="__id" _type="Output" id="a9a8902b-e631-4d97-97cb-b51310ba1289">
+<Record fieldDelimiter="|" label="outputMetadata" name="outputMetadata" recordDelimiter="&#10;" type="delimited">
+<Field __artificialType="_id" __systemManaged="true" name="__id" type="string"/>
+<Field __sourcePath="{}/outputMetadata/Name" label="Name" name="Name" type="string"/>
+<Field __sourcePath="{}/outputMetadata/KSE__Description__c" label="KSE__Description__c" name="KSE__Description__c" type="string"/>
+<Field __sourcePath="{}/outputMetadata/KSE__Rev__c" label="KSE__Rev__c" name="KSE__Rev__c" type="string"/>
+<Field __sourcePath="{}/outputMetadata/KSE__UOM__c" label="KSE__UOM__c" name="KSE__UOM__c" type="string"/>
+</Record>
+</Metadata>
+<Dictionary>
+<Entry id="DictionaryEntry0" input="true" name="inputPayload" output="false" type="object"/>
+<Entry id="DictionaryEntry1" input="false" name="outputPayload" output="true" type="object"/>
+</Dictionary>
+</Global>
+<Phase number="0">
+<Node enabled="enabled" fileURL="dict:inputPayload" guiHeight="0" guiName="MAP Reader" guiWidth="0" guiX="20" guiY="20" id="BEAN_READER0" type="BEAN_READER">
+<attr name="mapping"><![CDATA[<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Context outPort="0" sequenceField="__id" xpath=".">
+  <Mapping cloverField="ITEMIDENTIFIER" trim="true" xpath="ITEMIDENTIFIER"/>
+  <Mapping cloverField="DESCRIPTION" trim="true" xpath="DESCRIPTION"/>
+  <Mapping cloverField="REVISIONIDENTIFIER" trim="true" xpath="REVISIONIDENTIFIER"/>
+  <Mapping cloverField="GLOBALLIFECYCLEPHASECODE" trim="true" xpath="GLOBALLIFECYCLEPHASECODE"/>
+  <Mapping cloverField="GLOBALPRODUCTTYPECODE" trim="true" xpath="GLOBALPRODUCTTYPECODE"/>
+  <Mapping cloverField="KENANDYUOM" trim="true" xpath="KENANDYUOM"/>
+  <Mapping cloverField="UOMID" trim="true" xpath="UOMID"/>
+</Context>
+]]></attr>
+<attr name="_data_format"><![CDATA[MAP]]></attr>
+</Node>
+<Node enabled="enabled" fileURL="dict:outputPayload" guiHeight="0" guiName="MAP Writer" guiWidth="0" guiX="460" guiY="20" id="MAP_WRITER0" type="MAP_WRITER">
+<attr name="mapping"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<clover:collection clover:name="outputMetadata" xmlns:clover="http://www.cloveretl.com/ns/xmlmapping">
+  <item clover:inPort="0">
+    <Name>$0.Name</Name>
+    <KSE_x005f_x005fDescription_x005f_x005fc>$0.KSE__Description__c</KSE_x005f_x005fDescription_x005f_x005fc>
+    <KSE_x005f_x005fRev_x005f_x005fc>$0.KSE__Rev__c</KSE_x005f_x005fRev_x005f_x005fc>
+    <KSE_x005f_x005fUOM_x005f_x005fc>$0.KSE__UOM__c</KSE_x005f_x005fUOM_x005f_x005fc>
+  </item>
+</clover:collection>]]></attr>
+<attr name="_data_format"><![CDATA[MAP]]></attr>
+</Node>
+<Node enabled="enabled" guiHeight="0" guiName="inputMetadata_to_outputMetadata" guiWidth="0" guiX="240" guiY="20" id="REFORMAT0" type="REFORMAT">
+<attr name="transform"><![CDATA[//#CTL2
+
+// Transforms input record into output record.
+function integer transform() {
+	$out.0.KSE__UOM__c = $in.0.UOMID;
+		$out.0.KSE__Rev__c = $in.0.REVISIONIDENTIFIER;
+	$out.0.KSE__Description__c = $in.0.DESCRIPTION;
+	$out.0.Name = $in.0.ITEMIDENTIFIER;
+$out.0.__id=$in.0.__id;
+		return ALL;
+}
+
+// Called during component initialization.
+// function boolean init() {}
+
+// Called during each graph run before the transform is executed. May be used to allocate and initialize resources
+// required by the transform. All resources allocated within this method should be released
+// by the postExecute() method.
+// function void preExecute() {}
+
+// Called only if transform() throws an exception.
+// function integer transformOnError(string errorMessage, string stackTrace) {}
+
+// Called during each graph run after the entire transform was executed. Should be used to free any resources
+// allocated within the preExecute() method.
+// function void postExecute() {}
+
+// Called to return a user-defined error message when an error occurs.
+// function string getMessage() {}
+]]></attr>
+</Node>
+<Edge debugMode="true" fromNode="BEAN_READER0:0" guiBendpoints="" id="Edge0" inPort="Port 0 (in)" metadata="b69186e3-bb76-43a9-85bc-484a890af5c7" outPort="Port 0 (out)" toNode="REFORMAT0:0"/>
+<Edge debugMode="true" fromNode="REFORMAT0:0" guiBendpoints="" id="Edge1" inPort="Port 0 (in)" metadata="a9a8902b-e631-4d97-97cb-b51310ba1289" outPort="Port 0 (out)" toNode="MAP_WRITER0:0"/>
+</Phase>
+</Graph>

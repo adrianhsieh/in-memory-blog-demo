@@ -1,0 +1,6 @@
+----------------------------------------------------------------
+2012-09-22 21:21:28.253 GMT:
+ Booting Derby version The Apache Software Foundation - Apache Derby - 10.6.1.0 - (938214): instance a816c00e-0139-efdb-4492-000003b33360 
+on database directory memory:/Users/adrianhsieh/git/in-memory-blog-demo/blogdemo   with class loader sun.misc.Launcher$AppClassLoader@57fee6fc
+
+Database Class Loader started - derby.database.classpath=''

@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Graph author="adrianhsieh" created="Wed May 23 15:02:54 PDT 2012" guiVersion="3.3.0.M2" id="1337813132671" licenseCode="Unlicensed" licenseType="Unknown" modified="Wed May 23 15:02:54 PDT 2012" modifiedBy="adrianhsieh" name="MapArenaPDX" revision="1.0" showComponentDetails="false">
+<Global>
+<Metadata __sourcePath="{=}/ProductDataeXchangePackage/Items/Item/AdditionalAttributes" _dataStructure="OBJECT" _id="__id" _metadataParentId="Metadata0" _parent_id="__parent_id" _type="Input" id="Metadata1">
+<Record fieldDelimiter="|" name="AdditionalAttributesType" recordDelimiter="&#10;" type="delimited">
+<Field __artificialType="_id" __systemManaged="true" name="__id" type="string"/>
+<Field __artificialType="_parent_id" __systemManaged="true" name="__parent_id" type="string"/>
+<Field __sourcePath="{=}/ProductDataeXchangePackage/Items/Item/AdditionalAttributes/@groupLabel" label="groupLabel" name="groupLabel" type="string"/>
+</Record>
+</Metadata>
+<Metadata __sourcePath="{=}/ProductDataeXchangePackage/Items/Item/AdditionalAttributes/AdditionalAttribute" _dataStructure="OBJECT" _id="__id" _metadataParentId="Metadata1" _parent_id="__parent_id" _type="Input" id="Metadata2">
+<Record fieldDelimiter="|" name="AdditionalAttributeType" recordDelimiter="&#10;" type="delimited">
+<Field __artificialType="_id" __systemManaged="true" name="__id" type="string"/>
+<Field __artificialType="_parent_id" __systemManaged="true" name="__parent_id" type="string"/>
+<Field __sourcePath="{=}/ProductDataeXchangePackage/Items/Item/AdditionalAttributes/AdditionalAttribute/text()" label="text()" name="text" type="string"/>
+<Field __sourcePath="{=}/ProductDataeXchangePackage/Items/Item/AdditionalAttributes/AdditionalAttribute/@name" label="name" name="name" type="string"/>
+<Field __sourcePath="{=}/ProductDataeXchangePackage/Items/Item/AdditionalAttributes/AdditionalAttribute/@value" label="value" name="value" type="string"/>
+<Field __sourcePath="{=}/ProductDataeXchangePackage/Items/Item/AdditionalAttributes/AdditionalAttribute/@dataType" label="dataType" name="dataType" type="string"/>
+<Field __sourcePath="{=}/ProductDataeXchangePackage/Items/Item/AdditionalAttributes/AdditionalAttribute/@dimension" label="dimension" name="dimension" type="string"/>
+<Field __sourcePath="{=}/ProductDataeXchangePackage/Items/Item/AdditionalAttributes/AdditionalAttribute/@description" label="description" name="description" type="string"/>
+</Record>
+</Metadata>
+<Metadata __sourcePath="{}/outputMetadata" _dataStructure="OBJECT" _id="__id" _type="Output" id="5d3a36ce-3eb8-4704-94e0-8cc839063246">
+<Record fieldDelimiter="|" label="outputMetadata" name="outputMetadata" recordDelimiter="&#10;" type="delimited">
+<Field __artificialType="_id" __systemManaged="true" name="__id" type="string"/>
+<Field __sourcePath="{=}/outputMetadata/itemIdentifier" name="itemIdentifier" type="string"/>
+<Field __sourcePath="{=}/outputMetadata/description" name="description" type="string"/>
+<Field __sourcePath="{=}/outputMetadata/revisionIdentifier" name="revisionIdentifier" type="string"/>
+<Field __sourcePath="{=}/outputMetadata/globalProductUnitOfMeasureCode" name="globalProductUnitOfMeasureCode" type="string"/>
+<Field __sourcePath="{=}/outputMetadata/revisionReleasedDate" containerType="" name="revisionReleasedDate" type="date"/>
+</Record>
+</Metadata>
+<Metadata __sourcePath="{=}/ProductDataeXchangePackage" _dataStructure="OBJECT" _id="__id" _type="Input" id="Metadata0">
+<Record fieldDelimiter="|" name="ProductDataeXchangePackageType" recordDelimiter="&#10;" type="delimited">
+<Field __artificialType="_id" __systemManaged="true" name="__id" type="string"/>
+<Field __sourcePath="{=}/ProductDataeXchangePackage/Items/Item/@itemIdentifier" label="itemIdentifier" name="itemIdentifier" type="string"/>
+<Field __sourcePath="{=}/ProductDataeXchangePackage/Items/Item/@itemUniqueIdentifier" label="itemUniqueIdentifier" name="itemUniqueIdentifier" type="string"/>
+<Field __sourcePath="{=}/ProductDataeXchangePackage/Items/Item/@globalLifeCyclePhaseCode" label="globalLifeCyclePhaseCode" name="globalLifeCyclePhaseCode" type="string"/>
+<Field __sourcePath="{=}/ProductDataeXchangePackage/Items/Item/@globalProductTypeCode" label="globalProductTypeCode" name="globalProductTypeCode" type="string"/>
+<Field __sourcePath="{=}/ProductDataeXchangePackage/Items/Item/@revisionIdentifier" label="revisionIdentifier" name="revisionIdentifier" type="string"/>
+<Field __sourcePath="{=}/ProductDataeXchangePackage/Items/Item/@proprietaryProductFamily" label="proprietaryProductFamily" name="proprietaryProductFamily" type="string"/>
+<Field __sourcePath="{=}/ProductDataeXchangePackage/Items/Item/@category" label="category" name="category" type="string"/>
+<Field __sourcePath="{=}/ProductDataeXchangePackage/Items/Item/@globalProductUnitOfMeasureCode" label="globalProductUnitOfMeasureCode" name="globalProductUnitOfMeasureCode" type="string"/>
+<Field __sourcePath="{=}/ProductDataeXchangePackage/Items/Item/@revisionReleasedDate" label="revisionReleasedDate" name="revisionReleasedDate" type="date"/>
+<Field __sourcePath="{=}/ProductDataeXchangePackage/Items/Item/@ownerName" label="ownerName" name="ownerName" type="string"/>
+<Field __sourcePath="{=}/ProductDataeXchangePackage/Items/Item/@isTopLevel" label="isTopLevel" name="isTopLevel" type="string"/>
+<Field __sourcePath="{=}/ProductDataeXchangePackage/Items/Item/@description" label="description" name="description" type="string"/>
+<Field __sourcePath="{=}/ProductDataeXchangePackage/@thisDocumentIdentifier" label="thisDocumentIdentifier" name="thisDocumentIdentifier" type="string"/>
+<Field __sourcePath="{=}/ProductDataeXchangePackage/@thisDocumentGenerationDateTime" label="thisDocumentGenerationDateTime" name="thisDocumentGenerationDateTime" type="date"/>
+<Field __sourcePath="{=}/ProductDataeXchangePackage/@thisDocumentModificationDateTime" label="thisDocumentModificationDateTime" name="thisDocumentModificationDateTime" type="date"/>
+<Field __sourcePath="{=}/ProductDataeXchangePackage/@originatedByContactName" label="originatedByContactName" name="originatedByContactName" type="string"/>
+<Field __sourcePath="{=}/ProductDataeXchangePackage/@packageType" label="packageType" name="packageType" type="string"/>
+<Field __sourcePath="{=}/ProductDataeXchangePackage/@dataSource" label="dataSource" name="dataSource" type="string"/>
+<Field __sourcePath="{=}/ProductDataeXchangePackage/@thisDocumentCopyright" label="thisDocumentCopyright" name="thisDocumentCopyright" type="string"/>
+</Record>
+</Metadata>
+<Dictionary>
+<Entry id="DictionaryEntry0" input="true" name="inputPayload" output="false" type="object"/>
+<Entry id="DictionaryEntry1" input="false" name="outputPayload" output="true" type="object"/>
+</Dictionary>
+</Global>
+<Phase number="0">
+<Node enabled="enabled" fileURL="dict:outputPayload" guiHeight="0" guiName="MAP Writer" guiWidth="0" guiX="460" guiY="20" id="MAP_WRITER0" type="MAP_WRITER">
+<attr name="mapping"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<outputMetadata xmlns:clover="http://www.cloveretl.com/ns/xmlmapping" clover:inPort="0">
+  <itemIdentifier>$0.itemIdentifier</itemIdentifier>
+  <description>$0.description</description>
+  <revisionIdentifier>$0.revisionIdentifier</revisionIdentifier>
+  <globalProductUnitOfMeasureCode>$0.globalProductUnitOfMeasureCode</globalProductUnitOfMeasureCode>
+  <revisionReleasedDate>$0.revisionReleasedDate</revisionReleasedDate>
+</outputMetadata>]]></attr>
+<attr name="_data_format"><![CDATA[MAP]]></attr>
+</Node>
+<Node enabled="enabled" guiHeight="0" guiName="ProductDataeXchangePackage_to_outputMetadata" guiWidth="0" guiX="240" guiY="20" id="REFORMAT0" type="REFORMAT">
+<attr name="transform"><![CDATA[//#CTL2
+
+// Transforms input record into output record.
+function integer transform() {
+	$out.0.revisionReleasedDate = $in.0.revisionReleasedDate;
+	$out.0.globalProductUnitOfMeasureCode = $in.0.globalProductUnitOfMeasureCode;
+	$out.0.revisionIdentifier = $in.0.revisionIdentifier;
+	$out.0.description = $in.0.description;
+	$out.0.itemIdentifier = $in.0.itemIdentifier;
+$out.0.__id=$in.0.__id;
+		return ALL;
+}
+
+// Called during component initialization.
+// function boolean init() {}
+
+// Called during each graph run before the transform is executed. May be used to allocate and initialize resources
+// required by the transform. All resources allocated within this method should be released
+// by the postExecute() method.
+// function void preExecute() {}
+
+// Called only if transform() throws an exception.
+// function integer transformOnError(string errorMessage, string stackTrace) {}
+
+// Called during each graph run after the entire transform was executed. Should be used to free any resources
+// allocated within the preExecute() method.
+// function void postExecute() {}
+
+// Called to return a user-defined error message when an error occurs.
+// function string getMessage() {}
+]]></attr>
+</Node>
+<Node charset="UTF-8" enabled="enabled" fileURL="dict:inputPayload" guiHeight="0" guiName="XML Reader" guiWidth="0" guiX="20" guiY="20" id="XML_READER0" type="XML_READER">
+<attr name="xmlSchemaURL"><![CDATA[/ProductDataeXchangePackage.xsd]]></attr>
+<attr name="mapping"><![CDATA[<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Context outPort="0" sequenceField="__id" xpath="/ProductDataeXchangePackage">
+  <Mapping cloverField="itemIdentifier" trim="true" xpath="Items/Item/@itemIdentifier"/>
+  <Mapping cloverField="itemUniqueIdentifier" trim="true" xpath="Items/Item/@itemUniqueIdentifier"/>
+  <Mapping cloverField="globalLifeCyclePhaseCode" trim="true" xpath="Items/Item/@globalLifeCyclePhaseCode"/>
+  <Mapping cloverField="globalProductTypeCode" trim="true" xpath="Items/Item/@globalProductTypeCode"/>
+  <Mapping cloverField="revisionIdentifier" trim="true" xpath="Items/Item/@revisionIdentifier"/>
+  <Mapping cloverField="proprietaryProductFamily" trim="true" xpath="Items/Item/@proprietaryProductFamily"/>
+  <Mapping cloverField="category" trim="true" xpath="Items/Item/@category"/>
+  <Mapping cloverField="globalProductUnitOfMeasureCode" trim="true" xpath="Items/Item/@globalProductUnitOfMeasureCode"/>
+  <Mapping cloverField="revisionReleasedDate" trim="true" xpath="Items/Item/@revisionReleasedDate"/>
+  <Mapping cloverField="ownerName" trim="true" xpath="Items/Item/@ownerName"/>
+  <Mapping cloverField="isTopLevel" trim="true" xpath="Items/Item/@isTopLevel"/>
+  <Mapping cloverField="description" trim="true" xpath="Items/Item/@description"/>
+  <Mapping cloverField="thisDocumentIdentifier" trim="true" xpath="@thisDocumentIdentifier"/>
+  <Mapping cloverField="thisDocumentGenerationDateTime" trim="true" xpath="@thisDocumentGenerationDateTime"/>
+  <Mapping cloverField="thisDocumentModificationDateTime" trim="true" xpath="@thisDocumentModificationDateTime"/>
+  <Mapping cloverField="originatedByContactName" trim="true" xpath="@originatedByContactName"/>
+  <Mapping cloverField="packageType" trim="true" xpath="@packageType"/>
+  <Mapping cloverField="dataSource" trim="true" xpath="@dataSource"/>
+  <Mapping cloverField="thisDocumentCopyright" trim="true" xpath="@thisDocumentCopyright"/>
+</Context>
+]]></attr>
+<attr name="_data_format"><![CDATA[XML]]></attr>
+</Node>
+<Edge fromNode="REFORMAT0:0" guiBendpoints="" id="Edge1" inPort="Port 0 (in)" metadata="5d3a36ce-3eb8-4704-94e0-8cc839063246" outPort="Port 0 (out)" toNode="MAP_WRITER0:0"/>
+<Edge fromNode="XML_READER0:0" guiBendpoints="" id="Edge0" inPort="Port 0 (in)" metadata="Metadata0" outPort="Port 0 (out)" toNode="REFORMAT0:0"/>
+</Phase>
+</Graph>

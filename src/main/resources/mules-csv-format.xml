@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<!DOCTYPE PZMAP SYSTEM	"http://flatpack.sourceforge.net/flatpack.dtd" >
+<PZMAP>
+	<COLUMN name="name" />
+	<COLUMN name="externalid" />
+	<COLUMN name="value" />
+	<COLUMN name="lastmodified" />	
+</PZMAP>

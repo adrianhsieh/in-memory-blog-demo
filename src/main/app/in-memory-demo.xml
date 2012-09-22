@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:file="http://www.mulesoft.org/schema/mule/file" xmlns:jdbc-ee="http://www.mulesoft.org/schema/mule/ee/jdbc" xmlns:context="http://www.springframework.org/schema/context" xmlns:data-mapper="http://www.mulesoft.org/schema/mule/ee/data-mapper" xmlns:sfdc="http://www.mulesoft.org/schema/mule/sfdc" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:spring="http://www.springframework.org/schema/beans" xmlns:core="http://www.mulesoft.org/schema/mule/core" version="EE-3.3.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="
+http://www.mulesoft.org/schema/mule/file http://www.mulesoft.org/schema/mule/file/current/mule-file.xsd 
+http://www.mulesoft.org/schema/mule/ee/jdbc http://www.mulesoft.org/schema/mule/ee/jdbc/current/mule-jdbc-ee.xsd 
+http://www.mulesoft.org/schema/mule/sfdc http://www.mulesoft.org/schema/mule/sfdc/current/mule-sfdc.xsd 
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd 
+http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd 
+http://www.mulesoft.org/schema/mule/ee/data-mapper http://www.mulesoft.org/schema/mule/ee/data-mapper/current/mule-data-mapper.xsd ">
+    <sfdc:config name="salesforce" username="ah.blog.demo@mulesoft.org" password="mule2blog" securityToken="HcM1Dkn1LoM7AIZhqj6iykjT" url="https://www.salesforce.com/services/Soap/u/23.0" doc:name="Salesforce"/>
+    <spring:beans>
+        <spring:bean id="datasource" name="datasource" class="org.enhydra.jdbc.standard.StandardDataSource" destroy-method="shutdown">
+            <spring:property name="driverName" value="org.apache.derby.jdbc.EmbeddedDriver"/>
+            <spring:property name="url" value="jdbc:derby:memory:blogdemo"/>
+        </spring:bean>
+        <spring:bean id="dbinitialization" name="dbinit" class="org.mule.blogdemo.init.DBInitialization"/>
+    </spring:beans>
+    <jdbc-ee:connector name="apache-derby" dataSource-ref="datasource" validateConnections="false" queryTimeout="-1" pollingFrequency="0" doc:name="Database">
+        <jdbc-ee:query key="insertRecord" value="INSERT INTO table1 (Name, External_ID__c, Value__c, Last_Modified) VALUES (#[map-payload:name], #[map-payload:externalid], #[map-payload:value], #[map-payload:lastmodified])"/>
+        <jdbc-ee:query key="selectRecord" value="SELECT Name, External_ID__c, Value__c FROM table1 ORDER BY Last_Modified"/>
+    </jdbc-ee:connector>
+    <flow name="mainFlow" doc:name="mainFlow" processingStrategy="synchronous">
+        <file:inbound-endpoint path="src/test/resources" moveToDirectory="src/test/archives" responseTimeout="10000" doc:name="Input File"/>
+        <jdbc-ee:csv-to-maps-transformer ignoreFirstRecord="true" doc:name="CSV to Maps" mappingFile="src/main/resources/mules-csv-format.xml"/>
+        <foreach doc:name="Foreach">
+        	<logger message="#[payload]" level="INFO" doc:name="csv record" />
+            <jdbc-ee:outbound-endpoint exchange-pattern="one-way" queryKey="insertRecord" queryTimeout="-1" connector-ref="apache-derby" doc:name="insert-record"/>
+        </foreach>
+        <jdbc-ee:outbound-endpoint exchange-pattern="request-response" queryKey="selectRecord" queryTimeout="-1" connector-ref="apache-derby" doc:name="select records"/>
+        <sfdc:upsert config-ref="salesforce" externalIdFieldName="External_ID__c" type="Demo_Object__c" doc:name="upsert.record.in.salesforce">
+            <sfdc:objects ref="#[payload]"/>
+        </sfdc:upsert>
+    </flow>
+</mule>

@@ -1,0 +1,1029 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<mule-configuration xmlns="http://www.mulesoft.com/tooling/messageflow" name="kenandy-arena">
+    <global-element name="Property Placeholder" type="http://www.springframework.org/schema/context/property-placeholder" entity-id="08937021-32fa-4d4b-a9e5-c44149fdc29b">
+        <properties>
+            <property name="location" value="mule.dev.properties"/>
+        </properties>
+    </global-element>
+    <global-element name="salesforce" type="http://www.mulesoft.org/schema/mule/sfdc/config" entity-id="e0ef3859-1f3a-4fcd-9736-8f3115c41075">
+        <properties>
+            <property name="name" value="salesforce"/>
+            <property name="username" value="${sfdc.username}"/>
+            <property name="password" value="${sfdc.password}"/>
+            <property name="securityToken" value="${sfdc.securityToken}"/>
+            <property name="url" value="https://test.salesforce.com/services/Soap/u/23.0"/>
+            <property name="proxyHost"/>
+            <property name="proxyPort"/>
+            <property name="proxyUsername"/>
+            <property name="proxyPassword"/>
+            <property name="objectStore-ref"/>
+        </properties>
+    </global-element>
+    <global-element name="Bean" type="http://www.springframework.org/schema/beans/bean" entity-id="e9a057ec-3305-494f-9084-01431b349177">
+        <properties>
+            <property name="id" value="embeddedDataSource"/>
+            <property name="name"/>
+            <property name="class" value="org.enhydra.jdbc.standard.StandardDataSource"/>
+            <property name="parent"/>
+            <property name="scope"/>
+            <property name="children"/>
+            <property name="abstract"/>
+            <property name="lazy-init"/>
+            <property name="autowire"/>
+            <property name="depends-on"/>
+            <property name="autowire-candidate"/>
+            <property name="primary"/>
+            <property name="init-method"/>
+            <property name="destroy-method" value="shutdown"/>
+            <property name="factory-method"/>
+            <property name="factory-bean"/>
+            <property-collection name="@http://www.springframework.org/schema/beans/property;0">
+                <property name="name" value="driverName"/>
+                <property name="value" value="org.apache.derby.jdbc.EmbeddedDriver"/>
+            </property-collection>
+            <property-collection name="@http://www.springframework.org/schema/beans/property;1">
+                <property name="name" value="url"/>
+                <property name="value" value="jdbc:derby:memory:kenandyArena"/>
+            </property-collection>
+        </properties>
+    </global-element>
+    <global-element name="Bean" type="http://www.springframework.org/schema/beans/bean" entity-id="d6c7c674-efdc-4fa5-b7b1-dd93f9bef64a">
+        <properties>
+            <property name="id" value="dbinitialization"/>
+            <property name="name" value="Bean"/>
+            <property name="class" value="com.mulesoft.kenandy.init.DBInitialization"/>
+            <property name="parent"/>
+            <property name="scope"/>
+            <property name="children"/>
+            <property name="abstract"/>
+            <property name="lazy-init"/>
+            <property name="autowire"/>
+            <property name="depends-on"/>
+            <property name="autowire-candidate"/>
+            <property name="primary"/>
+            <property name="init-method"/>
+            <property name="destroy-method"/>
+            <property name="factory-method"/>
+            <property name="factory-bean"/>
+        </properties>
+    </global-element>
+    <global-element name="derby_jdbc" type="http://www.mulesoft.org/schema/mule/ee/jdbc/connector" entity-id="0b7ba315-34e4-4ad0-8da9-4d53090aa032">
+        <properties>
+            <property name="name" value="derby_jdbc"/>
+            <property name="dataSource-ref to JDBC DataSource" value="embeddedDataSource"/>
+            <property name="dataSource-ref to Bean" value="embeddedDataSource"/>
+            <property name="dispatcherPoolFactory-ref"/>
+            <property name="queryRunner-ref"/>
+            <property name="resultSetHandler-ref"/>
+            <property name="dynamicNotification"/>
+            <property name="validateConnections" value="false"/>
+            <property name="transactionPerMessage"/>
+            <property name="queryTimeout" value="-1"/>
+            <property name="pollingFrequency" value="0"/>
+            <property-collection name="@http://www.mulesoft.org/schema/mule/ee/jdbc/query;0">
+                <property name="value" value="INSERT into kse_items (itemIdentifier, itemUniqueIdentifier, description, revisionIdentifier, globalProductTypeCode, kenandyUOM)VALUES(#[map-payload:itemIdentifier],#[map-payload:itemUniqueIdentifier], #[map-payload:description], #[map-payload:revisionIdentifier], #[map-payload:globalProductTypeCode],#[map-payload:kenandyUOM])"/>
+                <property name="key" value="insertItem"/>
+            </property-collection>
+            <property-collection name="@http://www.mulesoft.org/schema/mule/ee/jdbc/query;1">
+                <property name="value" value="INSERT into kse_assembly (itemidentifier, versionnotes, changenumber, revisionreleaseddate)VALUES(#[map-payload:itemidentifier], #[map-payload:versionnotes], #[map-payload:changenumber], #[map-payload:revisionreleaseddate])"/>
+                <property name="key" value="insertAssembly"/>
+            </property-collection>
+            <property-collection name="@http://www.mulesoft.org/schema/mule/ee/jdbc/query;2">
+                <property name="value" value="INSERT INTO kse_bom (billofmaterialitemidentifier, itemquantity, materialeffectivitydate)VALUES(#[map-payload:billofmaterialitemidentifier], #[map-payload:itemquantity], #[map-payload:materialeffectivitydate])"/>
+                <property name="key" value="insertBOM"/>
+            </property-collection>
+            <property-collection name="@http://www.mulesoft.org/schema/mule/ee/jdbc/query;3">
+                <property name="value" value="INSERT INTO uom (uomname, uomid)VALUES(#[map-payload:Name], #[map-payload:Id])"/>
+                <property name="key" value="insertUOM"/>
+            </property-collection>
+            <property-collection name="@http://www.mulesoft.org/schema/mule/ee/jdbc/query;4">
+                <property name="value" value="SELECT itemidentifier, itemuniqueidentifier, description, revisionidentifier, globallifecyclephasecode, globalproducttypecode, kenandyUOM, uomid FROM kse_items left outer join uom on kenandyUOM=uomname"/>
+                <property name="key" value="Get Items"/>
+            </property-collection>
+            <property-collection name="@http://www.mulesoft.org/schema/mule/ee/jdbc/query;5">
+                <property name="value" value="SELECT itemidentifier, versionnotes, changenumber, revisionreleaseddate, salesforceItemId FROM kse_assembly inner join kse_items on itemidentifier=itemIdentifier "/>
+                <property name="key" value="getassembly"/>
+            </property-collection>
+            <property-collection name="@http://www.mulesoft.org/schema/mule/ee/jdbc/query;6">
+                <property name="value" value="SELECT itemidentifier, versionnotes, changenumber, revisionreleaseddate FROM kse_assembly"/>
+                <property name="key" value="getassemblyitemid"/>
+            </property-collection>
+            <property-collection name="@http://www.mulesoft.org/schema/mule/ee/jdbc/query;7">
+                <property name="value" value="SELECT billofmaterialitemidentifier, itemquantity, materialeffectivitydate FROM kse_bom"/>
+                <property name="key" value="getbom"/>
+            </property-collection>
+            <property-collection name="@http://www.mulesoft.org/schema/mule/ee/jdbc/query;8">
+                <property name="value" value="DELETE FROM uom WHERE uomname is not null"/>
+                <property name="key" value="truncateuom"/>
+            </property-collection>
+            <property-collection name="@http://www.mulesoft.org/schema/mule/ee/jdbc/query;9">
+                <property name="value" value="UPDATE kse_items SET salesforceItemId=#[map-payload:SFDCID] WHERE itemIdentifier=#[map-payload:IDENTIFIER]"/>
+                <property name="key" value="updatekseitems"/>
+            </property-collection>
+        </properties>
+    </global-element>
+    <global-element name="MapArenaPDX" type="http://www.mulesoft.org/schema/mule/ee/data-mapper/config" entity-id="36bf9ac8-3896-4de4-8c4d-f53cfe594854">
+        <properties>
+            <property name="name" value="MapArenaPDX"/>
+            <property name="transformationGraphPath" value="maparenapdx.grf"/>
+        </properties>
+    </global-element>
+    <global-element name="PDX" type="http://www.mulesoft.org/schema/mule/ee/data-mapper/config" entity-id="7a2c83d4-d70d-4d38-b43a-8f0dc44380f3">
+        <properties>
+            <property name="name" value="PDX"/>
+            <property name="transformationGraphPath" value="pdx.grf"/>
+        </properties>
+    </global-element>
+    <global-element name="derby2kenandy" type="http://www.mulesoft.org/schema/mule/ee/data-mapper/config" entity-id="d843971d-56a5-421d-8746-01820fd78828">
+        <properties>
+            <property name="name" value="derby2kenandy"/>
+            <property name="transformationGraphPath" value="derby2kenandy.grf"/>
+        </properties>
+    </global-element>
+    <global-element name="Assembly2Kenandy" type="http://www.mulesoft.org/schema/mule/ee/data-mapper/config" entity-id="dd8b5610-e4c7-48d7-b320-813242c87ad1">
+        <properties>
+            <property name="name" value="Assembly2Kenandy"/>
+            <property name="transformationGraphPath" value="assembly2kenandy.grf"/>
+        </properties>
+    </global-element>
+    <flow SubFlow="false" name="kenandy-arenaFlow1">
+        <properties>
+            <property name="processingStrategy2" value="synchronous"/>
+            <property name="processingStrategy" value="synchronous"/>
+            <property name="bussinessEventsLabel"/>
+            <property name="tracking:enable-default-events"/>
+        </properties>
+        <lane hadOnlyOneElement="false" entity-id="fbd28e49-0b14-4754-85bd-d5c45f6ff2b2">
+            <endpoint direction="Inbound" message-exchange-pattern="OneWay" name="PDX Files" type="http://www.mulesoft.org/schema/mule/file/endpoint" entity-id="ead2a44d-0b9c-4cf2-ac6f-8c3a29dac0f1">
+                <properties>
+                    <property name="exchange-pattern" value="one-way"/>
+                    <property name="path" value="${pdx.input}"/>
+                    <property name="outputPattern"/>
+                    <property name="moveToPattern"/>
+                    <property name="moveToDirectory" value="${pdx.archive}"/>
+                    <property name="pollingFrequency"/>
+                    <property name="fileAge"/>
+                    <property name="businessEventsLabel"/>
+                    <property name="tracking:enable-default-events"/>
+                    <property name="address"/>
+                    <property name="responseTimeout" value="10000"/>
+                    <property name="encoding"/>
+                    <property name="disableTransportTransformer"/>
+                    <property name="mimeType"/>
+                    <property name="comparator"/>
+                    <property name="reverseOrder"/>
+                    <property name="connector-ref"/>
+                    <property name="ref"/>
+                    <property name="transformer-refs"/>
+                </properties>
+            </endpoint>
+            <pattern name="File to String" type="http://www.mulesoft.org/schema/mule/file/file-to-string-transformer" entity-id="7572eda3-7f77-4caa-a3be-e6c81e499f8f">
+                <properties>
+                    <property name="returnClass"/>
+                    <property name="ignoreBadInput"/>
+                    <property name="encoding"/>
+                    <property name="mimeType"/>
+                </properties>
+            </pattern>
+            <scope name="Enricher item" type="org.mule.tooling.ui.modules.core.scope.enricher" entity-id="bac1e95e-171a-4fa3-8fb7-a973265d354c">
+                <properties>
+                    <property name="source" value="#[payload]"/>
+                    <property name="target" value="#[variable:itemsubflow]"/>
+                </properties>
+                <compartment entity-id="cf2977e2-4c0d-42fc-8e94-0ef969dd5a60">
+                    <lane hadOnlyOneElement="false" entity-id="3239003d-010c-4f3d-8588-37cbb8ad5b8c">
+                        <pattern name="Flow Reference" type="http://www.mulesoft.org/schema/mule/core/flow-ref" entity-id="338ffcb0-72c4-455f-9a8c-7be53c3a2cfe">
+                            <properties>
+<property name="name" value="kenandy-arenaItemFlow"/>
+                            </properties>
+                        </pattern>
+                    </lane>
+                </compartment>
+            </scope>
+            <scope name="Enricher Assembly" type="org.mule.tooling.ui.modules.core.scope.enricher" entity-id="e65a385f-3982-4161-81eb-5d6079723cb1">
+                <properties>
+                    <property name="source" value="#[payload]"/>
+                    <property name="target" value="#[variable:assemblyoutput]"/>
+                </properties>
+                <compartment entity-id="ce9a98fb-2726-4e86-a02d-b00bd25f560a">
+                    <lane hadOnlyOneElement="false" entity-id="e022ceb7-a09e-471b-ae4c-ea7bd8a8cfaf">
+                        <pattern name="Flow Reference" type="http://www.mulesoft.org/schema/mule/core/flow-ref" entity-id="7fa07420-57d4-4600-819e-380e0ea2275c">
+                            <properties>
+<property name="name" value="kenandy-arenaAssemblyFlow"/>
+                            </properties>
+                        </pattern>
+                    </lane>
+                </compartment>
+            </scope>
+            <scope name="Enricher Component" type="org.mule.tooling.ui.modules.core.scope.enricher" entity-id="0089abf7-21e0-4293-82f4-9c5985c6072f">
+                <properties>
+                    <property name="source" value="#[payload]"/>
+                    <property name="target" value="#[variable:componentoutput]"/>
+                </properties>
+                <compartment entity-id="e4e5fa27-5bbb-4fe9-9869-f54a1fa4ba5e">
+                    <lane hadOnlyOneElement="false" entity-id="9b563b82-79cd-4d00-ac07-dc22238e3892">
+                        <pattern name="Flow Reference" type="http://www.mulesoft.org/schema/mule/core/flow-ref" entity-id="c4687a5d-32a8-4be4-8dc0-6c30fe494234">
+                            <properties>
+<property name="name" value="kenandy-arenaComponentFlow"/>
+                            </properties>
+                        </pattern>
+                    </lane>
+                </compartment>
+            </scope>
+        </lane>
+    </flow>
+    <flow SubFlow="true" name="kenandy-arenaItemFlow">
+        <properties>
+            <property name="processingStrategy2"/>
+            <property name="processingStrategy"/>
+            <property name="bussinessEventsLabel"/>
+            <property name="tracking:enable-default-events"/>
+        </properties>
+        <lane hadOnlyOneElement="false" entity-id="6c0a8afb-34dc-456a-b381-74ed46210a39">
+            <pattern name="Logger" type="http://www.mulesoft.org/schema/mule/core/logger" entity-id="abc2456f-303d-4017-b4be-12d1d25f3578">
+                <properties>
+                    <property name="message"/>
+                    <property name="level" value="INFO"/>
+                    <property name="category"/>
+                </properties>
+            </pattern>
+            <pattern name="Map-Item" type="http://www.mulesoft.org/schema/mule/ee/data-mapper/data-mapper-connector" entity-id="bb70e6be-994d-47ca-aae1-989a8962f813">
+                <properties>
+                    <property name="config-ref" value="PDX"/>
+                    <property name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute" value="http://www.mulesoft.org/schema/mule/ee/data-mapper/transform"/>
+                    <property name="config-ref" value="PDX"/>
+                    <property name="input-ref"/>
+                </properties>
+            </pattern>
+            <scope name="Foreach Item" type="http://www.mulesoft.org/schema/mule/core/foreach" entity-id="7974d5b6-e3ce-4e07-a821-afd1c537baad">
+                <properties>
+                    <property name="collection"/>
+                    <property name="counterVariableName"/>
+                    <property name="batchSize"/>
+                    <property name="rootMessageVariableName"/>
+                </properties>
+                <compartment entity-id="3b40540a-4b9e-4d68-b1a4-845b9174ee88">
+                    <lane hadOnlyOneElement="false" entity-id="ddcd0611-3223-4d8f-9134-247cbd5f9e71">
+                        <splitter name="Choice" type="org.mule.tooling.ui.modules.core.pattern.cbr" entity-id="d2964bf0-5d58-403d-863b-5dc41bec78a4">
+                            <properties>
+<property-collection name="8ceae185-7c24-44d0-b5c4-eefb8d7b0bcb">
+    <property name="choice.otherwise" value="true"/>
+</property-collection>
+<property-collection name="e7149f84-b5fc-48d9-a6b5-8b1b7479fd54">
+    <property name="choice.expression" value="#[groovy:return (payload.billOfMaterialItemIdentifier == null)]"/>
+</property-collection>
+                            </properties>
+                            <pattern name="Choice" type="org.mule.tooling.ui.modules.core.pattern.cbr" entity-id="628517d2-7448-49e8-9bad-bb0d39277c8f">
+<properties>
+    <property-collection name="8ceae185-7c24-44d0-b5c4-eefb8d7b0bcb">
+        <property name="choice.otherwise" value="true"/>
+    </property-collection>
+    <property-collection name="e7149f84-b5fc-48d9-a6b5-8b1b7479fd54">
+        <property name="choice.expression" value="#[groovy:return (payload.billOfMaterialItemIdentifier == null)]"/>
+    </property-collection>
+</properties>
+                            </pattern>
+                            <compartment entity-id="0e13c79b-480c-4977-8ea5-c72223855153">
+<lane hadOnlyOneElement="false" entity-id="e7149f84-b5fc-48d9-a6b5-8b1b7479fd54">
+    <pattern name="Logger" type="http://www.mulesoft.org/schema/mule/core/logger" entity-id="f420f628-b5b8-43ba-997d-4133404af41c">
+        <properties>
+            <property name="message" value="Post PDX mapping #[payload]"/>
+            <property name="level" value="INFO"/>
+            <property name="category"/>
+        </properties>
+    </pattern>
+    <endpoint direction="Outbound" message-exchange-pattern="OneWay" name="Insert Item" type="http://www.mulesoft.org/schema/mule/ee/jdbc/endpoint" entity-id="3df07a34-df24-4422-85c0-3eb18aa2d105">
+        <properties>
+            <property name="exchange-pattern" value="one-way"/>
+            <property name="exchange-pattern" value="one-way"/>
+            <property name=""/>
+            <property name="queryKey" value="insertItem"/>
+            <property name="businessEventsLabel"/>
+            <property name="tracking:enable-default-events"/>
+            <property name="address"/>
+            <property name="responseTimeout"/>
+            <property name="encoding"/>
+            <property name="disableTransportTransformer"/>
+            <property name="mimeType"/>
+            <property name="queryTimeout" value="-1"/>
+            <property name="pollingFrequency"/>
+            <property name="connector-ref" value="derby_jdbc"/>
+            <property name="ref"/>
+            <property name="transformer-refs"/>
+            <property name="responseTransformer-refs"/>
+        </properties>
+    </endpoint>
+    <endpoint direction="Outbound" message-exchange-pattern="OneWay" name="Get Items" type="http://www.mulesoft.org/schema/mule/ee/jdbc/endpoint" entity-id="f9b1e609-47af-41af-a29c-9330096efed2">
+        <properties>
+            <property name="exchange-pattern" value="one-way"/>
+            <property name="exchange-pattern" value="request-response"/>
+            <property name=""/>
+            <property name="queryKey" value="Get Items"/>
+            <property name="businessEventsLabel"/>
+            <property name="tracking:enable-default-events"/>
+            <property name="address"/>
+            <property name="responseTimeout"/>
+            <property name="encoding"/>
+            <property name="disableTransportTransformer"/>
+            <property name="mimeType"/>
+            <property name="queryTimeout" value="-1"/>
+            <property name="pollingFrequency"/>
+            <property name="connector-ref" value="derby_jdbc"/>
+            <property name="ref"/>
+            <property name="transformer-refs"/>
+            <property name="responseTransformer-refs"/>
+        </properties>
+    </endpoint>
+    <pattern name="Collection Splitter" type="http://www.mulesoft.org/schema/mule/core/collection-splitter" entity-id="4ca12837-7b18-49b8-bd34-36cd115fb44e">
+        <properties>
+            <property name="enableCorrelation"/>
+            <property name="businessEventsLabel"/>
+            <property name="tracking:enable-default-events"/>
+        </properties>
+    </pattern>
+    <pattern name="Logger" type="http://www.mulesoft.org/schema/mule/core/logger" entity-id="b77a7797-d8a6-455a-9052-db2e654b23c8">
+        <properties>
+            <property name="message"/>
+            <property name="level" value="INFO"/>
+            <property name="category"/>
+        </properties>
+    </pattern>
+</lane>
+<lane hadOnlyOneElement="false" entity-id="8ceae185-7c24-44d0-b5c4-eefb8d7b0bcb">
+    <pattern name="Logger" type="http://www.mulesoft.org/schema/mule/core/logger" entity-id="0622c82f-529a-4026-8586-95c5bd43f9ec">
+        <properties>
+            <property name="message"/>
+            <property name="level" value="DEBUG"/>
+            <property name="category"/>
+        </properties>
+    </pattern>
+</lane>
+                            </compartment>
+                        </splitter>
+                    </lane>
+                </compartment>
+            </scope>
+        </lane>
+    </flow>
+    <flow SubFlow="true" name="kenandy-arenaAssemblyFlow">
+        <properties>
+            <property name="processingStrategy2"/>
+            <property name="processingStrategy"/>
+            <property name="bussinessEventsLabel"/>
+            <property name="tracking:enable-default-events"/>
+        </properties>
+        <lane hadOnlyOneElement="false" entity-id="ec2ce263-7d87-48e6-849d-edadd6d1b6c1">
+            <pattern name="Map-Assembly" type="http://www.mulesoft.org/schema/mule/ee/data-mapper/data-mapper-connector" entity-id="0952b99a-185d-4789-915b-5f36d6834c90">
+                <properties>
+                    <property name="config-ref" value="PDX"/>
+                    <property name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute" value="http://www.mulesoft.org/schema/mule/ee/data-mapper/transform"/>
+                    <property name="config-ref" value="PDX"/>
+                    <property name="input-ref"/>
+                </properties>
+            </pattern>
+            <pattern name="Logger" type="http://www.mulesoft.org/schema/mule/core/logger" entity-id="a357a26d-d02b-41bf-acbc-cba599072243">
+                <properties>
+                    <property name="message" value="Post PDX mapping #[payload]"/>
+                    <property name="level" value="INFO"/>
+                    <property name="category"/>
+                </properties>
+            </pattern>
+            <scope name="Foreach Assembly" type="http://www.mulesoft.org/schema/mule/core/foreach" entity-id="e1cca6d2-6569-4861-8f00-22ec1f24f98e">
+                <properties>
+                    <property name="collection"/>
+                    <property name="counterVariableName"/>
+                    <property name="batchSize"/>
+                    <property name="rootMessageVariableName"/>
+                </properties>
+                <compartment entity-id="c70f3d93-009b-499b-974b-0cfac08f0a0b">
+                    <lane hadOnlyOneElement="false" entity-id="5d1152d1-d11c-413c-9de0-46e196e86f3a">
+                        <splitter name="Choice" type="org.mule.tooling.ui.modules.core.pattern.cbr" entity-id="db814458-d29d-4a20-b487-1936b3fa22e0">
+                            <properties>
+<property-collection name="9ed7a4ca-f9f6-4f64-a04e-7e05c71960b9">
+    <property name="choice.otherwise" value="true"/>
+</property-collection>
+<property-collection name="604021ae-0fc0-4bd4-a7ec-2fcba5c217b5">
+    <property name="choice.expression" value="#[groovy:return (payload.billOfMaterialItemIdentifier != null)]"/>
+</property-collection>
+                            </properties>
+                            <pattern name="Choice" type="org.mule.tooling.ui.modules.core.pattern.cbr" entity-id="fe3c659d-407b-44b6-b05a-3fb4165b3be3">
+<properties>
+    <property-collection name="9ed7a4ca-f9f6-4f64-a04e-7e05c71960b9">
+        <property name="choice.otherwise" value="true"/>
+    </property-collection>
+    <property-collection name="604021ae-0fc0-4bd4-a7ec-2fcba5c217b5">
+        <property name="choice.expression" value="#[groovy:return (payload.billOfMaterialItemIdentifier != null)]"/>
+    </property-collection>
+</properties>
+                            </pattern>
+                            <compartment entity-id="7cef5235-be48-4ca1-97da-f3987c018c3f">
+<lane hadOnlyOneElement="false" entity-id="604021ae-0fc0-4bd4-a7ec-2fcba5c217b5">
+    <pattern name="Logger" type="http://www.mulesoft.org/schema/mule/core/logger" entity-id="6da5a513-7fde-4e57-916f-dd1c3166cc72">
+        <properties>
+            <property name="message"/>
+            <property name="level" value="INFO"/>
+            <property name="category"/>
+        </properties>
+    </pattern>
+    <endpoint direction="Outbound" message-exchange-pattern="OneWay" name="Insert Assembly" type="http://www.mulesoft.org/schema/mule/ee/jdbc/endpoint" entity-id="4ed1c1ff-348f-4808-8090-4108949fe59f">
+        <properties>
+            <property name="exchange-pattern" value="one-way"/>
+            <property name="exchange-pattern" value="one-way"/>
+            <property name=""/>
+            <property name="queryKey" value="insertAssembly"/>
+            <property name="businessEventsLabel"/>
+            <property name="tracking:enable-default-events"/>
+            <property name="address"/>
+            <property name="responseTimeout"/>
+            <property name="encoding"/>
+            <property name="disableTransportTransformer"/>
+            <property name="mimeType"/>
+            <property name="queryTimeout" value="-1"/>
+            <property name="pollingFrequency"/>
+            <property name="connector-ref" value="derby_jdbc"/>
+            <property name="ref"/>
+            <property name="transformer-refs"/>
+            <property name="responseTransformer-refs"/>
+        </properties>
+    </endpoint>
+    <endpoint direction="Outbound" message-exchange-pattern="OneWay" name="Get Assemblies" type="http://www.mulesoft.org/schema/mule/ee/jdbc/endpoint" entity-id="24400e81-ed1a-4fcf-a57b-51483ae6b637">
+        <properties>
+            <property name="exchange-pattern" value="one-way"/>
+            <property name="exchange-pattern" value="one-way"/>
+            <property name=""/>
+            <property name="queryKey" value="getassembly"/>
+            <property name="businessEventsLabel"/>
+            <property name="tracking:enable-default-events"/>
+            <property name="address"/>
+            <property name="responseTimeout"/>
+            <property name="encoding"/>
+            <property name="disableTransportTransformer"/>
+            <property name="mimeType"/>
+            <property name="queryTimeout" value="-1"/>
+            <property name="pollingFrequency"/>
+            <property name="connector-ref" value="derby_jdbc"/>
+            <property name="ref"/>
+            <property name="transformer-refs"/>
+            <property name="responseTransformer-refs"/>
+        </properties>
+    </endpoint>
+    <pattern name="Logger" type="http://www.mulesoft.org/schema/mule/core/logger" entity-id="a7b50d9f-bf06-4132-bbe2-6beea6daa22f">
+        <properties>
+            <property name="message" value="MESSAGE BEFORE SPLITTER: #[payload]"/>
+            <property name="level" value="INFO"/>
+            <property name="category"/>
+        </properties>
+    </pattern>
+    <pattern name="Collection Splitter" type="http://www.mulesoft.org/schema/mule/core/collection-splitter" entity-id="dcd3b141-bf03-45d3-9c1b-6013712b1aff">
+        <properties>
+            <property name="enableCorrelation"/>
+            <property name="businessEventsLabel"/>
+            <property name="tracking:enable-default-events"/>
+        </properties>
+    </pattern>
+    <pattern name="Logger" type="http://www.mulesoft.org/schema/mule/core/logger" entity-id="7346b024-78b3-405c-8c01-4c4b9c93ea53">
+        <properties>
+            <property name="message" value="AFTER SPLITTER: #[payload]"/>
+            <property name="level" value="INFO"/>
+            <property name="category"/>
+        </properties>
+    </pattern>
+</lane>
+<lane hadOnlyOneElement="false" entity-id="9ed7a4ca-f9f6-4f64-a04e-7e05c71960b9">
+    <pattern name="Logger" type="http://www.mulesoft.org/schema/mule/core/logger" entity-id="94121d97-aaef-429d-86a0-c77a04ff69b1">
+        <properties>
+            <property name="message"/>
+            <property name="level" value="DEBUG"/>
+            <property name="category"/>
+        </properties>
+    </pattern>
+</lane>
+                            </compartment>
+                        </splitter>
+                    </lane>
+                </compartment>
+            </scope>
+        </lane>
+    </flow>
+    <flow SubFlow="true" name="kenandy-arenaComponentFlow">
+        <properties>
+            <property name="processingStrategy2"/>
+            <property name="processingStrategy"/>
+            <property name="bussinessEventsLabel"/>
+            <property name="tracking:enable-default-events"/>
+        </properties>
+        <lane hadOnlyOneElement="false" entity-id="87f92900-0df5-4b70-8d31-e7ce6eca0a0a">
+            <pattern name="Map-Component" type="http://www.mulesoft.org/schema/mule/ee/data-mapper/data-mapper-connector" entity-id="a72c9532-3013-4528-82fb-0301361f78d4">
+                <properties>
+                    <property name="config-ref" value="PDX"/>
+                    <property name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute" value="http://www.mulesoft.org/schema/mule/ee/data-mapper/transform"/>
+                    <property name="config-ref" value="PDX"/>
+                    <property name="input-ref"/>
+                </properties>
+            </pattern>
+            <pattern name="Logger" type="http://www.mulesoft.org/schema/mule/core/logger" entity-id="5a996390-db20-49ed-8d97-01b600363310">
+                <properties>
+                    <property name="message" value="Post PDX mapping #[payload]"/>
+                    <property name="level" value="INFO"/>
+                    <property name="category"/>
+                </properties>
+            </pattern>
+            <scope name="Foreach Component" type="http://www.mulesoft.org/schema/mule/core/foreach" entity-id="6e40df58-9ac3-4cf3-a44b-1938164e4cdd">
+                <properties>
+                    <property name="collection"/>
+                    <property name="counterVariableName"/>
+                    <property name="batchSize"/>
+                    <property name="rootMessageVariableName"/>
+                </properties>
+                <compartment entity-id="25e4f5a3-29ea-416d-977c-4518d1f3d1d6">
+                    <lane hadOnlyOneElement="false" entity-id="3ce6be56-c25d-4630-a5ce-7e8b8b1803b5">
+                        <splitter name="Choice" type="org.mule.tooling.ui.modules.core.pattern.cbr" entity-id="4ffdaec4-cd33-420b-a257-a6d9121aae77">
+                            <properties>
+<property-collection name="cab019d1-ddd4-425f-b0d9-a36092e231db">
+    <property name="choice.expression" value="#[groovy:return (payload.billOfMaterialItemIdentifier != null)]"/>
+</property-collection>
+<property-collection name="5008a6f4-d323-49f6-8559-fb57b7f8bd50">
+    <property name="choice.otherwise" value="true"/>
+</property-collection>
+                            </properties>
+                            <pattern name="Choice" type="org.mule.tooling.ui.modules.core.pattern.cbr" entity-id="db877732-62bf-4f01-bcb7-58b743797ee4">
+<properties>
+    <property-collection name="cab019d1-ddd4-425f-b0d9-a36092e231db">
+        <property name="choice.expression" value="#[groovy:return (payload.billOfMaterialItemIdentifier != null)]"/>
+    </property-collection>
+    <property-collection name="5008a6f4-d323-49f6-8559-fb57b7f8bd50">
+        <property name="choice.otherwise" value="true"/>
+    </property-collection>
+</properties>
+                            </pattern>
+                            <compartment entity-id="03fc4921-ecdb-4999-b9e8-47d7c2e5ef69">
+<lane hadOnlyOneElement="false" entity-id="cab019d1-ddd4-425f-b0d9-a36092e231db">
+    <pattern name="Logger" type="http://www.mulesoft.org/schema/mule/core/logger" entity-id="a04a65ae-1a7c-48f7-9bfe-63f0adaac7c9">
+        <properties>
+            <property name="message"/>
+            <property name="level" value="INFO"/>
+            <property name="category"/>
+        </properties>
+    </pattern>
+    <endpoint direction="Outbound" message-exchange-pattern="OneWay" name="Insert Component" type="http://www.mulesoft.org/schema/mule/ee/jdbc/endpoint" entity-id="83b919fb-6524-498e-aa3b-5fdc0faa2aae">
+        <properties>
+            <property name="exchange-pattern" value="one-way"/>
+            <property name="exchange-pattern" value="one-way"/>
+            <property name=""/>
+            <property name="queryKey" value="insertBOM"/>
+            <property name="businessEventsLabel"/>
+            <property name="tracking:enable-default-events"/>
+            <property name="address"/>
+            <property name="responseTimeout"/>
+            <property name="encoding"/>
+            <property name="disableTransportTransformer"/>
+            <property name="mimeType"/>
+            <property name="queryTimeout" value="-1"/>
+            <property name="pollingFrequency"/>
+            <property name="connector-ref" value="derby_jdbc"/>
+            <property name="ref"/>
+            <property name="transformer-refs"/>
+            <property name="responseTransformer-refs"/>
+        </properties>
+    </endpoint>
+    <endpoint direction="Outbound" message-exchange-pattern="OneWay" name="Get BOM" type="http://www.mulesoft.org/schema/mule/ee/jdbc/endpoint" entity-id="b19b952c-05f8-42e3-bd8b-a251625eaf09">
+        <properties>
+            <property name="exchange-pattern" value="one-way"/>
+            <property name="exchange-pattern" value="one-way"/>
+            <property name=""/>
+            <property name="queryKey" value="getbom"/>
+            <property name="businessEventsLabel"/>
+            <property name="tracking:enable-default-events"/>
+            <property name="address"/>
+            <property name="responseTimeout"/>
+            <property name="encoding"/>
+            <property name="disableTransportTransformer"/>
+            <property name="mimeType"/>
+            <property name="queryTimeout" value="-1"/>
+            <property name="pollingFrequency"/>
+            <property name="connector-ref" value="derby_jdbc"/>
+            <property name="ref"/>
+            <property name="transformer-refs"/>
+            <property name="responseTransformer-refs"/>
+        </properties>
+    </endpoint>
+    <pattern name="Collection Splitter" type="http://www.mulesoft.org/schema/mule/core/collection-splitter" entity-id="8986c0f3-fd66-45c1-a883-f15cbcb56db0">
+        <properties>
+            <property name="enableCorrelation"/>
+            <property name="businessEventsLabel"/>
+            <property name="tracking:enable-default-events"/>
+        </properties>
+    </pattern>
+    <pattern name="Logger" type="http://www.mulesoft.org/schema/mule/core/logger" entity-id="7ed72c26-e247-4f14-aab8-15535d42d787">
+        <properties>
+            <property name="message"/>
+            <property name="level" value="INFO"/>
+            <property name="category"/>
+        </properties>
+    </pattern>
+</lane>
+<lane hadOnlyOneElement="false" entity-id="5008a6f4-d323-49f6-8559-fb57b7f8bd50">
+    <pattern name="Logger" type="http://www.mulesoft.org/schema/mule/core/logger" entity-id="2e9371d2-59de-4ed6-badb-839247142be5">
+        <properties>
+            <property name="message"/>
+            <property name="level" value="DEBUG"/>
+            <property name="category"/>
+        </properties>
+    </pattern>
+</lane>
+                            </compartment>
+                        </splitter>
+                    </lane>
+                </compartment>
+            </scope>
+        </lane>
+    </flow>
+    <flow SubFlow="false" name="kenandy-arenaFlow2">
+        <properties>
+            <property name="processingStrategy2"/>
+            <property name="processingStrategy"/>
+            <property name="bussinessEventsLabel"/>
+            <property name="tracking:enable-default-events"/>
+        </properties>
+        <lane hadOnlyOneElement="false" entity-id="a1e6f197-df5f-4645-8af3-e0db204ca6a4">
+            <endpoint direction="Inbound" message-exchange-pattern="OneWay" name="Quartz" type="http://www.mulesoft.org/schema/mule/quartz/endpoint" entity-id="94dbbddf-51f4-48a7-a025-a00b06f9f2dc">
+                <properties>
+                    <property name="exchange-pattern" value="one-way"/>
+                    <property name="jobName" value="SFDC"/>
+                    <property name="cronExpression" value="45 * * * * ?"/>
+                    <property name="repeatInterval" value="0"/>
+                    <property name="repeatCount"/>
+                    <property name="startDelay"/>
+                    <property name="businessEventsLabel"/>
+                    <property name="tracking:enable-default-events"/>
+                    <property name="address"/>
+                    <property name="responseTimeout" value="10000"/>
+                    <property name="encoding"/>
+                    <property name="disableTransportTransformer"/>
+                    <property name="mimeType"/>
+                    <property name="connector-ref"/>
+                    <property name="ref"/>
+                    <property name="transformer-refs"/>
+                    <property-collection name="@http://www.mulesoft.org/schema/mule/quartz/event-generator-job;0"/>
+                </properties>
+            </endpoint>
+            <scope name="Send to Items" type="org.mule.tooling.ui.modules.core.scope.enricher" entity-id="4c6d3656-41e8-4c73-aafa-11dcd21a2e4d">
+                <properties>
+                    <property name="source" value="#[payload]"/>
+                    <property name="target" value="#[variable:itemfile]"/>
+                </properties>
+                <compartment entity-id="bfb60407-87dd-4b48-97b1-894a17b52fd3">
+                    <lane hadOnlyOneElement="false" entity-id="c4289f1b-3c47-4a04-b6e1-b6ec59ae4dba">
+                        <pattern name="InsertItemstoKenandy" type="http://www.mulesoft.org/schema/mule/core/flow-ref" entity-id="f01dd855-7f45-4d30-8da4-ce8affa73595">
+                            <properties>
+<property name="name" value="InsertItemstoKenandy"/>
+                            </properties>
+                        </pattern>
+                    </lane>
+                </compartment>
+            </scope>
+            <scope name="Send to Assembly" type="org.mule.tooling.ui.modules.core.scope.enricher" entity-id="91a28597-0be3-4cf9-bcc4-c753935606fa">
+                <properties>
+                    <property name="source" value="#[payload]"/>
+                    <property name="target" value="#[variable:assemblyfile]"/>
+                </properties>
+                <compartment entity-id="72b360b0-0178-4730-b360-396db8081c7f">
+                    <lane hadOnlyOneElement="false" entity-id="d149e2f6-be31-4c1e-ae25-260033bd49ce">
+                        <pattern name="InsertAssemblytoKenandy" type="http://www.mulesoft.org/schema/mule/core/flow-ref" entity-id="a5ae3b10-dd17-4eed-b918-72b4b17b83c4">
+                            <properties>
+<property name="name" value="InsertAssemblytoKenandy"/>
+                            </properties>
+                        </pattern>
+                    </lane>
+                </compartment>
+            </scope>
+        </lane>
+    </flow>
+    <flow SubFlow="true" name="InsertItemstoKenandy">
+        <properties>
+            <property name="processingStrategy2"/>
+            <property name="processingStrategy"/>
+            <property name="bussinessEventsLabel"/>
+            <property name="tracking:enable-default-events"/>
+        </properties>
+        <lane hadOnlyOneElement="false" entity-id="c12696f0-e3f7-403e-9266-b8e53f90c46f">
+            <endpoint direction="Outbound" message-exchange-pattern="OneWay" name="Select Items" type="http://www.mulesoft.org/schema/mule/ee/jdbc/endpoint" entity-id="16159d05-b7fb-4546-bac5-c79427b7d41c">
+                <properties>
+                    <property name="exchange-pattern" value="one-way"/>
+                    <property name="exchange-pattern" value="request-response"/>
+                    <property name=""/>
+                    <property name="queryKey" value="Get Items"/>
+                    <property name="businessEventsLabel"/>
+                    <property name="tracking:enable-default-events"/>
+                    <property name="address"/>
+                    <property name="responseTimeout"/>
+                    <property name="encoding"/>
+                    <property name="disableTransportTransformer"/>
+                    <property name="mimeType"/>
+                    <property name="queryTimeout" value="-1"/>
+                    <property name="pollingFrequency"/>
+                    <property name="connector-ref" value="derby_jdbc"/>
+                    <property name="ref"/>
+                    <property name="transformer-refs"/>
+                    <property name="responseTransformer-refs"/>
+                </properties>
+            </endpoint>
+            <pattern name="Logger" type="http://www.mulesoft.org/schema/mule/core/logger" entity-id="d7ebef06-f246-4be3-a176-b97e3c57a96a">
+                <properties>
+                    <property name="message" value="MESSAGE ITEM 2 KENANDY: #[payload]"/>
+                    <property name="level" value="INFO"/>
+                    <property name="category"/>
+                </properties>
+            </pattern>
+            <pattern name="DataMapper" type="http://www.mulesoft.org/schema/mule/ee/data-mapper/data-mapper-connector" entity-id="329a5145-0444-475d-99e0-4d50ecb6989f">
+                <properties>
+                    <property name="config-ref" value="derby2kenandy"/>
+                    <property name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute" value="http://www.mulesoft.org/schema/mule/ee/data-mapper/transform"/>
+                    <property name="config-ref" value="derby2kenandy"/>
+                    <property name="input-ref"/>
+                </properties>
+            </pattern>
+            <pattern name="Logger" type="http://www.mulesoft.org/schema/mule/core/logger" entity-id="c75fb2a4-9231-4f76-ba83-10973fce9a93">
+                <properties>
+                    <property name="message" value="Before Upsert: #[payload]"/>
+                    <property name="level" value="INFO"/>
+                    <property name="category"/>
+                </properties>
+            </pattern>
+            <pattern name="Message Properties" type="http://www.mulesoft.org/schema/mule/core/message-properties-transformer" entity-id="118e273d-9387-4542-8414-607771c1b28b">
+                <properties>
+                    <property name="returnClass"/>
+                    <property name="ignoreBadInput"/>
+                    <property name="encoding"/>
+                    <property name="mimeType"/>
+                    <property name="overwrite"/>
+                    <property name="scope" value="invocation"/>
+                    <property-collection name="@http://www.mulesoft.org/schema/mule/core/add-message-property;0">
+                        <property name="value" value="#[payload]"/>
+                        <property name="key" value="Items"/>
+                    </property-collection>
+                </properties>
+            </pattern>
+            <pattern name="Logger" type="http://www.mulesoft.org/schema/mule/core/logger" entity-id="b780615c-8556-473c-aaa9-79835fc51b03">
+                <properties>
+                    <property name="message" value="Saved Items: #[payload]"/>
+                    <property name="level" value="INFO"/>
+                    <property name="category"/>
+                </properties>
+            </pattern>
+            <pattern name="upsert itemrecord" type="http://www.mulesoft.org/schema/mule/sfdc/sfdc-connector" entity-id="c878018c-c522-4ec3-bca9-8b9cf7f95d9e">
+                <properties>
+                    <property name="config-ref" value="salesforce"/>
+                    <property name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute" value="http://www.mulesoft.org/schema/mule/sfdc/upsert"/>
+                    <property name="config-ref" value="salesforce"/>
+                    <property name="externalIdFieldName" value="Name"/>
+                    <property name="type" value="KSE__Item__c"/>
+                    <property name=""/>
+                    <property name="username" value="mukul@lunera.com.sandbox"/>
+                    <property name="password" value="Kenandy2012"/>
+                    <property name="securityToken" value="gW1G2uyGyvT9keTkXLnK6ZKN"/>
+                    <property-collection name="@http://www.mulesoft.org/schema/mule/sfdc/upsert-objects;0">
+                        <property name="ref" value="#[payload]"/>
+                    </property-collection>
+                </properties>
+            </pattern>
+            <pattern name="Logger" type="http://www.mulesoft.org/schema/mule/core/logger" entity-id="42c2d8f9-afed-48db-b98e-652de815e309">
+                <properties>
+                    <property name="message" value="Updated Item: #[payload]"/>
+                    <property name="level" value="INFO"/>
+                    <property name="category"/>
+                </properties>
+            </pattern>
+            <pattern name="Script" type="http://www.mulesoft.org/schema/mule/scripting/groovyTransformer" entity-id="45ed3c8c-07dd-43c3-977b-d8b4593136be">
+                <properties>
+                    <property name="returnClass"/>
+                    <property name="ignoreBadInput"/>
+                    <property name="encoding"/>
+                    <property name="mimeType"/>
+                    <property-collection name="@http://www.mulesoft.org/schema/mule/scripting/script;0">
+                        <property name="text" value="import java.util.ArrayList;&#xA;import java.util.HashMap;&#xA;&#xA;def list = message.getInvocationProperty('Items');&#xA;&#xA;ArrayList newout = new ArrayList();&#xA;HashMap newmap = new HashMap();&#xA;&#xA;for(int i=0; i&lt;list.size(); i++){&#xA;&#x9;newmap = new HashMap();&#xA;&#x9;&#xA;&#x9;newmap.put('SFDCID', payload.get(i).getId());&#xA;&#x9;newmap.put('IDENTIFIER', list.get(i).get('Name'));&#xA;&#xA;newout.add(newmap);&#xA;}&#xA;&#xA;return newout;"/>
+                        <property name="engine" value="Groovy"/>
+                    </property-collection>
+                </properties>
+            </pattern>
+            <pattern name="Logger" type="http://www.mulesoft.org/schema/mule/core/logger" entity-id="0fec64d8-859e-4ccf-bacf-ab97af794374">
+                <properties>
+                    <property name="message" value="Transformed message:  #[payload]"/>
+                    <property name="level" value="INFO"/>
+                    <property name="category"/>
+                </properties>
+            </pattern>
+            <scope name="Foreach" type="http://www.mulesoft.org/schema/mule/core/foreach" entity-id="42e3cb95-996f-4f65-8131-c866fbd5309c">
+                <properties>
+                    <property name="collection"/>
+                    <property name="counterVariableName"/>
+                    <property name="batchSize"/>
+                    <property name="rootMessageVariableName"/>
+                </properties>
+                <compartment entity-id="7d114e1b-cf48-4e86-aafa-94cc496be065">
+                    <lane hadOnlyOneElement="false" entity-id="dd30ef14-7eed-413c-8b3b-eec184628689">
+                        <endpoint direction="Outbound" message-exchange-pattern="OneWay" name="Update kse_items" type="http://www.mulesoft.org/schema/mule/ee/jdbc/endpoint" entity-id="866670ee-1df4-42df-951b-b6913471de8a">
+                            <properties>
+<property name="exchange-pattern" value="one-way"/>
+<property name="exchange-pattern" value="one-way"/>
+<property name=""/>
+<property name="queryKey" value="updatekseitems"/>
+<property name="businessEventsLabel"/>
+<property name="tracking:enable-default-events"/>
+<property name="address"/>
+<property name="responseTimeout"/>
+<property name="encoding"/>
+<property name="disableTransportTransformer"/>
+<property name="mimeType"/>
+<property name="queryTimeout" value="-1"/>
+<property name="pollingFrequency"/>
+<property name="connector-ref" value="derby_jdbc"/>
+<property name="ref"/>
+<property name="transformer-refs"/>
+<property name="responseTransformer-refs"/>
+                            </properties>
+                        </endpoint>
+                        <endpoint direction="Outbound" message-exchange-pattern="OneWay" name="See updated item table" type="http://www.mulesoft.org/schema/mule/ee/jdbc/endpoint" entity-id="5c0828f8-06d1-4a76-9839-ce54ffa54c87">
+                            <properties>
+<property name="exchange-pattern" value="one-way"/>
+<property name="exchange-pattern" value="request-response"/>
+<property name=""/>
+<property name="queryKey" value="Get Items"/>
+<property name="businessEventsLabel"/>
+<property name="tracking:enable-default-events"/>
+<property name="address"/>
+<property name="responseTimeout"/>
+<property name="encoding"/>
+<property name="disableTransportTransformer"/>
+<property name="mimeType"/>
+<property name="queryTimeout" value="-1"/>
+<property name="pollingFrequency"/>
+<property name="connector-ref" value="derby_jdbc"/>
+<property name="ref"/>
+<property name="transformer-refs"/>
+<property name="responseTransformer-refs"/>
+                            </properties>
+                        </endpoint>
+                        <pattern name="Logger" type="http://www.mulesoft.org/schema/mule/core/logger" entity-id="8802e455-9b75-42f2-8a98-bf544dfa21b9">
+                            <properties>
+<property name="message" value="Items with SFDC Id: #[payload]"/>
+<property name="level" value="INFO"/>
+<property name="category"/>
+                            </properties>
+                        </pattern>
+                    </lane>
+                </compartment>
+            </scope>
+        </lane>
+    </flow>
+    <flow SubFlow="true" name="InsertAssemblytoKenandy">
+        <properties>
+            <property name="processingStrategy2"/>
+            <property name="processingStrategy"/>
+            <property name="bussinessEventsLabel"/>
+            <property name="tracking:enable-default-events"/>
+        </properties>
+        <lane hadOnlyOneElement="false" entity-id="18e1b55c-65ac-45f6-ab87-561c37af9cdd">
+            <endpoint direction="Outbound" message-exchange-pattern="OneWay" name="Select Assembly" type="http://www.mulesoft.org/schema/mule/ee/jdbc/endpoint" entity-id="4c94e9a5-7161-4018-9972-cde7e3da3c2c">
+                <properties>
+                    <property name="exchange-pattern" value="one-way"/>
+                    <property name="exchange-pattern" value="request-response"/>
+                    <property name=""/>
+                    <property name="queryKey" value="getassemblyitemid"/>
+                    <property name="businessEventsLabel"/>
+                    <property name="tracking:enable-default-events"/>
+                    <property name="address"/>
+                    <property name="responseTimeout"/>
+                    <property name="encoding"/>
+                    <property name="disableTransportTransformer"/>
+                    <property name="mimeType"/>
+                    <property name="queryTimeout" value="-1"/>
+                    <property name="pollingFrequency"/>
+                    <property name="connector-ref" value="derby_jdbc"/>
+                    <property name="ref"/>
+                    <property name="transformer-refs"/>
+                    <property name="responseTransformer-refs"/>
+                </properties>
+            </endpoint>
+            <pattern name="Logger" type="http://www.mulesoft.org/schema/mule/core/logger" entity-id="67c6d5a1-558d-4d4c-8ef3-728d27b78e2b">
+                <properties>
+                    <property name="message" value="Assembly Item: #[payload]"/>
+                    <property name="level" value="INFO"/>
+                    <property name="category"/>
+                </properties>
+            </pattern>
+            <pattern name="DataMapper" type="http://www.mulesoft.org/schema/mule/ee/data-mapper/data-mapper-connector" entity-id="cabd64b5-20f0-4734-98cf-1159bd2b628b">
+                <properties>
+                    <property name="config-ref" value="Assembly2Kenandy"/>
+                    <property name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute" value="http://www.mulesoft.org/schema/mule/ee/data-mapper/transform"/>
+                    <property name="config-ref" value="Assembly2Kenandy"/>
+                    <property name="input-ref"/>
+                </properties>
+            </pattern>
+            <pattern name="Logger" type="http://www.mulesoft.org/schema/mule/core/logger" entity-id="2bb3f4af-575c-4039-9a83-a35423055853">
+                <properties>
+                    <property name="message"/>
+                    <property name="level" value="INFO"/>
+                    <property name="category"/>
+                </properties>
+            </pattern>
+        </lane>
+    </flow>
+    <flow SubFlow="false" name="kenandy-UOM">
+        <properties>
+            <property name="processingStrategy2"/>
+            <property name="processingStrategy"/>
+            <property name="bussinessEventsLabel"/>
+            <property name="tracking:enable-default-events"/>
+        </properties>
+        <lane hadOnlyOneElement="false" entity-id="51a36acf-cda2-4632-ba4a-e86feabf3402">
+            <endpoint direction="Inbound" message-exchange-pattern="OneWay" name="Schedule UOM Get" type="http://www.mulesoft.org/schema/mule/quartz/endpoint" entity-id="0c1bb051-31dc-4d70-9fe3-cfcdfa04bdf5">
+                <properties>
+                    <property name="exchange-pattern" value="one-way"/>
+                    <property name="jobName" value="getUom"/>
+                    <property name="cronExpression" value="10 * * * * ?"/>
+                    <property name="repeatInterval" value="0"/>
+                    <property name="repeatCount"/>
+                    <property name="startDelay"/>
+                    <property name="businessEventsLabel"/>
+                    <property name="tracking:enable-default-events"/>
+                    <property name="address"/>
+                    <property name="responseTimeout" value="10000"/>
+                    <property name="encoding"/>
+                    <property name="disableTransportTransformer"/>
+                    <property name="mimeType"/>
+                    <property name="connector-ref"/>
+                    <property name="ref"/>
+                    <property name="transformer-refs"/>
+                    <property-collection name="@http://www.mulesoft.org/schema/mule/quartz/event-generator-job;0"/>
+                </properties>
+            </endpoint>
+            <endpoint direction="Outbound" message-exchange-pattern="OneWay" name="Truncate uom table" type="http://www.mulesoft.org/schema/mule/ee/jdbc/endpoint" entity-id="e45f1968-81fb-4d15-96cb-3efd0309112b">
+                <properties>
+                    <property name="exchange-pattern" value="one-way"/>
+                    <property name="exchange-pattern" value="one-way"/>
+                    <property name=""/>
+                    <property name="queryKey" value="truncateuom"/>
+                    <property name="businessEventsLabel"/>
+                    <property name="tracking:enable-default-events"/>
+                    <property name="address"/>
+                    <property name="responseTimeout"/>
+                    <property name="encoding"/>
+                    <property name="disableTransportTransformer"/>
+                    <property name="mimeType"/>
+                    <property name="queryTimeout" value="-1"/>
+                    <property name="pollingFrequency"/>
+                    <property name="connector-ref" value="derby_jdbc"/>
+                    <property name="ref"/>
+                    <property name="transformer-refs"/>
+                    <property name="responseTransformer-refs"/>
+                </properties>
+            </endpoint>
+            <pattern name="Salesforce" type="http://www.mulesoft.org/schema/mule/sfdc/sfdc-connector" entity-id="a39a7860-cb12-44c4-b268-7cff70ac4a32">
+                <properties>
+                    <property name="config-ref" value="salesforce"/>
+                    <property name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute" value="http://www.mulesoft.org/schema/mule/sfdc/query-all"/>
+                    <property name="config-ref" value="salesforce"/>
+                    <property name="query" value="SELECT Id, Name FROM KSE__UOM__c"/>
+                    <property name=""/>
+                    <property name="username" value="mukul@lunera.com.sandbox"/>
+                    <property name="password" value="Kenandy2012"/>
+                    <property name="securityToken" value="gW1G2uyGyvT9keTkXLnK6ZKN"/>
+                </properties>
+            </pattern>
+            <scope name="Foreach" type="http://www.mulesoft.org/schema/mule/core/foreach" entity-id="d3268535-f5ea-43d4-baef-a84438b334f1">
+                <properties>
+                    <property name="collection"/>
+                    <property name="counterVariableName"/>
+                    <property name="batchSize"/>
+                    <property name="rootMessageVariableName"/>
+                </properties>
+                <compartment entity-id="7264c792-4f68-4452-b898-035f0223b2c4">
+                    <lane hadOnlyOneElement="false" entity-id="eac1d286-414d-492b-8a2c-351ab98beab0">
+                        <endpoint direction="Outbound" message-exchange-pattern="OneWay" name="Insert UOM" type="http://www.mulesoft.org/schema/mule/ee/jdbc/endpoint" entity-id="1bfcb8a9-cbcb-485b-a65a-c8d46314618b">
+                            <properties>
+<property name="exchange-pattern" value="one-way"/>
+<property name="exchange-pattern" value="one-way"/>
+<property name=""/>
+<property name="queryKey" value="insertUOM"/>
+<property name="businessEventsLabel"/>
+<property name="tracking:enable-default-events"/>
+<property name="address"/>
+<property name="responseTimeout"/>
+<property name="encoding"/>
+<property name="disableTransportTransformer"/>
+<property name="mimeType"/>
+<property name="queryTimeout" value="-1"/>
+<property name="pollingFrequency"/>
+<property name="connector-ref" value="derby_jdbc"/>
+<property name="ref"/>
+<property name="transformer-refs"/>
+<property name="responseTransformer-refs"/>
+                            </properties>
+                        </endpoint>
+                    </lane>
+                </compartment>
+            </scope>
+        </lane>
+    </flow>
+</mule-configuration>
